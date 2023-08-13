@@ -3615,3 +3615,43 @@ contract CMTAT_STANDALONE is CMTAT_BASE {
 
     // No storage gap because the contract is deployed in standalone mode
 }
+
+contract Factory {
+   CMTAT_STANDALONE[] public companies;
+   address payable admin;
+
+   uint256 public index;
+
+   constructor(){
+       admin = payable(msg.sender);
+   }
+
+   function CreateCompany(
+        address forwarderIrrevocable,
+        address admin,
+        string memory nameIrrevocable,
+        string memory symbolIrrevocable,
+        string memory tokenId_,
+        string memory terms_,
+        IEIP1404Wrapper ruleEngine_,
+        string memory information_,
+        uint256 flag_
+       ) public returns(address){
+
+     CMTAT_STANDALONE newCompany = new CMTAT_STANDALONE(
+        forwarderIrrevocable,
+        admin,
+        nameIrrevocable,
+        symbolIrrevocable,
+        tokenId_,
+        terms_,
+        ruleEngine_,
+        information_,
+        flag_
+         );
+     companies.push(newCompany);
+     index += 1;
+     return address(newCompany);
+   }
+
+}
