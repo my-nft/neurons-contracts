@@ -3956,7 +3956,6 @@ contract Factory is MetaTxModule{
    }
 
    function CreateCompany(
-        address forwarderIrrevocable,
         address admin,
         string memory nameIrrevocable,
         string memory symbolIrrevocable,
@@ -3966,16 +3965,9 @@ contract Factory is MetaTxModule{
         string memory information_,
         uint256 flag_
        ) public returns(address){
-// (address forwarder, 
-// bool deployedWithProxy_, 
-// address owner, 
-// string memory name, 
-// string memory symbol, 
-// string memory tokenId, 
-// string memory terms
-//     )
+
      CMTAT newCompany = new CMTAT(
-        forwarderIrrevocable,
+        forwarder,
         false,
         admin,
         nameIrrevocable,
