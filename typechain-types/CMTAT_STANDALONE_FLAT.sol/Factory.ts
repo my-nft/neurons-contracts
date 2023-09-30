@@ -29,7 +29,7 @@ import type {
 
 export interface FactoryInterface extends utils.Interface {
   functions: {
-    "CreateCompany(address,address,string,string,string,string,address,string,uint256)": FunctionFragment;
+    "CreateCompany(address,string,string,string,string,address,string,uint256)": FunctionFragment;
     "admin()": FunctionFragment;
     "companies(uint256)": FunctionFragment;
     "forwarder()": FunctionFragment;
@@ -56,7 +56,6 @@ export interface FactoryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "CreateCompany",
     values: [
-      PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
       PromiseOrValue<string>,
@@ -152,7 +151,6 @@ export interface Factory extends BaseContract {
 
   functions: {
     CreateCompany(
-      forwarderIrrevocable: PromiseOrValue<string>,
       admin: PromiseOrValue<string>,
       nameIrrevocable: PromiseOrValue<string>,
       symbolIrrevocable: PromiseOrValue<string>,
@@ -197,7 +195,6 @@ export interface Factory extends BaseContract {
   };
 
   CreateCompany(
-    forwarderIrrevocable: PromiseOrValue<string>,
     admin: PromiseOrValue<string>,
     nameIrrevocable: PromiseOrValue<string>,
     symbolIrrevocable: PromiseOrValue<string>,
@@ -242,7 +239,6 @@ export interface Factory extends BaseContract {
 
   callStatic: {
     CreateCompany(
-      forwarderIrrevocable: PromiseOrValue<string>,
       admin: PromiseOrValue<string>,
       nameIrrevocable: PromiseOrValue<string>,
       symbolIrrevocable: PromiseOrValue<string>,
@@ -293,7 +289,6 @@ export interface Factory extends BaseContract {
 
   estimateGas: {
     CreateCompany(
-      forwarderIrrevocable: PromiseOrValue<string>,
       admin: PromiseOrValue<string>,
       nameIrrevocable: PromiseOrValue<string>,
       symbolIrrevocable: PromiseOrValue<string>,
@@ -339,7 +334,6 @@ export interface Factory extends BaseContract {
 
   populateTransaction: {
     CreateCompany(
-      forwarderIrrevocable: PromiseOrValue<string>,
       admin: PromiseOrValue<string>,
       nameIrrevocable: PromiseOrValue<string>,
       symbolIrrevocable: PromiseOrValue<string>,
