@@ -33,12 +33,6 @@ const config: HardhatUserConfig = {
       allowUnlimitedContractSize: true,
       accounts: [
         ``,
-        ``,
-        ``,
-        ``,
-        ``,
-        ``,
-        ``,
       ],
     },
   },

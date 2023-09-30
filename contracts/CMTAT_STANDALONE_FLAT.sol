@@ -1,161 +1,7 @@
-// Sources flattened with hardhat v2.17.1 https://hardhat.org
+// File: openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol
 
-// SPDX-License-Identifier: MIT AND MPL-2.0
-
-// File contracts/interfaces/IEIP1404/IEIP1404.sol
-
-// Original license: SPDX_License_Identifier: MPL-2.0
-
-pragma solidity ^0.8.0;
-
-/*
-@dev Contrary to the EIP-1404, this interface does not inherit from the ERC20 interface
-*/
-interface IEIP1404 {
-    /**
-     * @dev See ERC/EIP-1404
-     *
-     */
-    function detectTransferRestriction(
-        address _from,
-        address _to,
-        uint256 _amount
-    ) external view returns (uint8);
-
-    /**
-     * @dev See ERC/EIP-1404
-     *
-     */
-    function messageForTransferRestriction(
-        uint8 _restrictionCode
-    ) external view returns (string memory);
-}
-
-
-// File contracts/interfaces/IEIP1404/IEIP1404Wrapper.sol
-
-// Original license: SPDX_License_Identifier: MPL-2.0
-
-pragma solidity ^0.8.0;
-
-interface IEIP1404Wrapper is IEIP1404 {
-    /* 
-    @dev leave the code 4-9 free/unused for further additions in your ruleEngine implementation
-    */
-    enum REJECTED_CODE_BASE {
-        TRANSFER_OK,
-        TRANSFER_REJECTED_PAUSED,
-        TRANSFER_REJECTED_FROM_FROZEN,
-        TRANSFER_REJECTED_TO_FROZEN
-    }
-
-    /**
-     * @dev Returns true if the transfer is valid, and false otherwise.
-     */
-    function validateTransfer(
-        address _from,
-        address _to,
-        uint256 _amount
-    ) external view returns (bool isValid);
-}
-
-
-// File openzeppelin-contracts-upgradeable/contracts/access/IAccessControlUpgradeable.sol
-
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts v4.4.1 (access/IAccessControl.sol)
-
-pragma solidity ^0.8.0;
-
-/**
- * @dev External interface of AccessControl declared to support ERC165 detection.
- */
-interface IAccessControlUpgradeable {
-    /**
-     * @dev Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole`
-     *
-     * `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite
-     * {RoleAdminChanged} not being emitted signaling this.
-     *
-     * _Available since v3.1._
-     */
-    event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole);
-
-    /**
-     * @dev Emitted when `account` is granted `role`.
-     *
-     * `sender` is the account that originated the contract call, an admin role
-     * bearer except when using {AccessControl-_setupRole}.
-     */
-    event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);
-
-    /**
-     * @dev Emitted when `account` is revoked `role`.
-     *
-     * `sender` is the account that originated the contract call:
-     *   - if using `revokeRole`, it is the admin role bearer
-     *   - if using `renounceRole`, it is the role bearer (i.e. `account`)
-     */
-    event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
-
-    /**
-     * @dev Returns `true` if `account` has been granted `role`.
-     */
-    function hasRole(bytes32 role, address account) external view returns (bool);
-
-    /**
-     * @dev Returns the admin role that controls `role`. See {grantRole} and
-     * {revokeRole}.
-     *
-     * To change a role's admin, use {AccessControl-_setRoleAdmin}.
-     */
-    function getRoleAdmin(bytes32 role) external view returns (bytes32);
-
-    /**
-     * @dev Grants `role` to `account`.
-     *
-     * If `account` had not been already granted `role`, emits a {RoleGranted}
-     * event.
-     *
-     * Requirements:
-     *
-     * - the caller must have ``role``'s admin role.
-     */
-    function grantRole(bytes32 role, address account) external;
-
-    /**
-     * @dev Revokes `role` from `account`.
-     *
-     * If `account` had been granted `role`, emits a {RoleRevoked} event.
-     *
-     * Requirements:
-     *
-     * - the caller must have ``role``'s admin role.
-     */
-    function revokeRole(bytes32 role, address account) external;
-
-    /**
-     * @dev Revokes `role` from the calling account.
-     *
-     * Roles are often managed via {grantRole} and {revokeRole}: this function's
-     * purpose is to provide a mechanism for accounts to lose their privileges
-     * if they are compromised (such as when a trusted device is misplaced).
-     *
-     * If the calling account had been granted `role`, emits a {RoleRevoked}
-     * event.
-     *
-     * Requirements:
-     *
-     * - the caller must be `account`.
-     */
-    function renounceRole(bytes32 role, address account) external;
-}
-
-
-// File openzeppelin-contracts-upgradeable/contracts/utils/AddressUpgradeable.sol
-
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.8.0) (utils/Address.sol)
+// SPDX-License-Identifier: MIT
+// OpenZeppelin Contracts (last updated v4.7.0) (utils/Address.sol)
 
 pragma solidity ^0.8.1;
 
@@ -206,7 +52,7 @@ library AddressUpgradeable {
      * imposed by `transfer`, making them unable to receive funds via
      * `transfer`. {sendValue} removes this limitation.
      *
-     * https://diligence.consensys.net/posts/2019/09/stop-using-soliditys-transfer-now/[Learn more].
+     * https://consensys.net/diligence/blog/2019/09/stop-using-soliditys-transfer-now/[Learn more].
      *
      * IMPORTANT: because control is transferred to `recipient`, care must be
      * taken to not create reentrancy vulnerabilities. Consider using
@@ -374,11 +220,10 @@ library AddressUpgradeable {
     }
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/proxy/utils/Initializable.sol
 
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.8.1) (proxy/utils/Initializable.sol)
+// OpenZeppelin Contracts (last updated v4.7.0) (proxy/utils/Initializable.sol)
 
 pragma solidity ^0.8.2;
 
@@ -520,31 +365,30 @@ abstract contract Initializable {
      */
     function _disableInitializers() internal virtual {
         require(!_initializing, "Initializable: contract is initializing");
-        if (_initialized < type(uint8).max) {
+        if (_initialized != type(uint8).max) {
             _initialized = type(uint8).max;
             emit Initialized(type(uint8).max);
         }
     }
 
     /**
-     * @dev Returns the highest version that has been initialized. See {reinitializer}.
+     * @dev Internal function that returns the initialized version. Returns `_initialized`
      */
     function _getInitializedVersion() internal view returns (uint8) {
         return _initialized;
     }
 
     /**
-     * @dev Returns `true` if the contract is currently initializing. See {onlyInitializing}.
+     * @dev Internal function that returns the initialized version. Returns `_initializing`
      */
     function _isInitializing() internal view returns (bool) {
         return _initializing;
     }
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/utils/ContextUpgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
 // OpenZeppelin Contracts v4.4.1 (utils/Context.sol)
 
 pragma solidity ^0.8.0;
@@ -581,84 +425,101 @@ abstract contract ContextUpgradeable is Initializable {
     uint256[50] private __gap;
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/access/IAccessControlUpgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/utils/introspection/IERC165Upgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts v4.4.1 (utils/introspection/IERC165.sol)
+// OpenZeppelin Contracts v4.4.1 (access/IAccessControl.sol)
 
 pragma solidity ^0.8.0;
 
 /**
- * @dev Interface of the ERC165 standard, as defined in the
- * https://eips.ethereum.org/EIPS/eip-165[EIP].
- *
- * Implementers can declare support of contract interfaces, which can then be
- * queried by others ({ERC165Checker}).
- *
- * For an implementation, see {ERC165}.
+ * @dev External interface of AccessControl declared to support ERC165 detection.
  */
-interface IERC165Upgradeable {
+interface IAccessControlUpgradeable {
     /**
-     * @dev Returns true if this contract implements the interface defined by
-     * `interfaceId`. See the corresponding
-     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]
-     * to learn more about how these ids are created.
+     * @dev Emitted when `newAdminRole` is set as ``role``'s admin role, replacing `previousAdminRole`
      *
-     * This function call must use less than 30 000 gas.
+     * `DEFAULT_ADMIN_ROLE` is the starting admin for all roles, despite
+     * {RoleAdminChanged} not being emitted signaling this.
+     *
+     * _Available since v3.1._
      */
-    function supportsInterface(bytes4 interfaceId) external view returns (bool);
-}
-
-
-// File openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol
-
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts v4.4.1 (utils/introspection/ERC165.sol)
-
-pragma solidity ^0.8.0;
-
-
-/**
- * @dev Implementation of the {IERC165} interface.
- *
- * Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check
- * for the additional interface id that will be supported. For example:
- *
- * ```solidity
- * function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
- *     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId);
- * }
- * ```
- *
- * Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation.
- */
-abstract contract ERC165Upgradeable is Initializable, IERC165Upgradeable {
-    function __ERC165_init() internal onlyInitializing {
-    }
-
-    function __ERC165_init_unchained() internal onlyInitializing {
-    }
-    /**
-     * @dev See {IERC165-supportsInterface}.
-     */
-    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
-        return interfaceId == type(IERC165Upgradeable).interfaceId;
-    }
+    event RoleAdminChanged(bytes32 indexed role, bytes32 indexed previousAdminRole, bytes32 indexed newAdminRole);
 
     /**
-     * @dev This empty reserved space is put in place to allow future versions to add new
-     * variables without shifting down storage in the inheritance chain.
-     * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
+     * @dev Emitted when `account` is granted `role`.
+     *
+     * `sender` is the account that originated the contract call, an admin role
+     * bearer except when using {AccessControl-_setupRole}.
      */
-    uint256[50] private __gap;
+    event RoleGranted(bytes32 indexed role, address indexed account, address indexed sender);
+
+    /**
+     * @dev Emitted when `account` is revoked `role`.
+     *
+     * `sender` is the account that originated the contract call:
+     *   - if using `revokeRole`, it is the admin role bearer
+     *   - if using `renounceRole`, it is the role bearer (i.e. `account`)
+     */
+    event RoleRevoked(bytes32 indexed role, address indexed account, address indexed sender);
+
+    /**
+     * @dev Returns `true` if `account` has been granted `role`.
+     */
+    function hasRole(bytes32 role, address account) external view returns (bool);
+
+    /**
+     * @dev Returns the admin role that controls `role`. See {grantRole} and
+     * {revokeRole}.
+     *
+     * To change a role's admin, use {AccessControl-_setRoleAdmin}.
+     */
+    function getRoleAdmin(bytes32 role) external view returns (bytes32);
+
+    /**
+     * @dev Grants `role` to `account`.
+     *
+     * If `account` had not been already granted `role`, emits a {RoleGranted}
+     * event.
+     *
+     * Requirements:
+     *
+     * - the caller must have ``role``'s admin role.
+     */
+    function grantRole(bytes32 role, address account) external;
+
+    /**
+     * @dev Revokes `role` from `account`.
+     *
+     * If `account` had been granted `role`, emits a {RoleRevoked} event.
+     *
+     * Requirements:
+     *
+     * - the caller must have ``role``'s admin role.
+     */
+    function revokeRole(bytes32 role, address account) external;
+
+    /**
+     * @dev Revokes `role` from the calling account.
+     *
+     * Roles are often managed via {grantRole} and {revokeRole}: this function's
+     * purpose is to provide a mechanism for accounts to lose their privileges
+     * if they are compromised (such as when a trusted device is misplaced).
+     *
+     * If the calling account had been granted `role`, emits a {RoleRevoked}
+     * event.
+     *
+     * Requirements:
+     *
+     * - the caller must be `account`.
+     */
+    function renounceRole(bytes32 role, address account) external;
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/utils/math/MathUpgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.8.0) (utils/math/Math.sol)
+// OpenZeppelin Contracts (last updated v4.7.0) (utils/math/Math.sol)
 
 pragma solidity ^0.8.0;
 
@@ -998,16 +859,15 @@ library MathUpgradeable {
     function log256(uint256 value, Rounding rounding) internal pure returns (uint256) {
         unchecked {
             uint256 result = log256(value);
-            return result + (rounding == Rounding.Up && 1 << (result * 8) < value ? 1 : 0);
+            return result + (rounding == Rounding.Up && 1 << (result << 3) < value ? 1 : 0);
         }
     }
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/utils/StringsUpgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.8.0) (utils/Strings.sol)
+// OpenZeppelin Contracts (last updated v4.7.0) (utils/Strings.sol)
 
 pragma solidity ^0.8.0;
 
@@ -1075,11 +935,81 @@ library StringsUpgradeable {
     }
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/utils/introspection/IERC165Upgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.8.0) (access/AccessControl.sol)
+// OpenZeppelin Contracts v4.4.1 (utils/introspection/IERC165.sol)
+
+pragma solidity ^0.8.0;
+
+/**
+ * @dev Interface of the ERC165 standard, as defined in the
+ * https://eips.ethereum.org/EIPS/eip-165[EIP].
+ *
+ * Implementers can declare support of contract interfaces, which can then be
+ * queried by others ({ERC165Checker}).
+ *
+ * For an implementation, see {ERC165}.
+ */
+interface IERC165Upgradeable {
+    /**
+     * @dev Returns true if this contract implements the interface defined by
+     * `interfaceId`. See the corresponding
+     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]
+     * to learn more about how these ids are created.
+     *
+     * This function call must use less than 30 000 gas.
+     */
+    function supportsInterface(bytes4 interfaceId) external view returns (bool);
+}
+
+// File: openzeppelin-contracts-upgradeable/contracts/utils/introspection/ERC165Upgradeable.sol
+
+
+// OpenZeppelin Contracts v4.4.1 (utils/introspection/ERC165.sol)
+
+pragma solidity ^0.8.0;
+
+
+/**
+ * @dev Implementation of the {IERC165} interface.
+ *
+ * Contracts that want to implement ERC165 should inherit from this contract and override {supportsInterface} to check
+ * for the additional interface id that will be supported. For example:
+ *
+ * ```solidity
+ * function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+ *     return interfaceId == type(MyInterface).interfaceId || super.supportsInterface(interfaceId);
+ * }
+ * ```
+ *
+ * Alternatively, {ERC165Storage} provides an easier to use but more expensive implementation.
+ */
+abstract contract ERC165Upgradeable is Initializable, IERC165Upgradeable {
+    function __ERC165_init() internal onlyInitializing {
+    }
+
+    function __ERC165_init_unchained() internal onlyInitializing {
+    }
+    /**
+     * @dev See {IERC165-supportsInterface}.
+     */
+    function supportsInterface(bytes4 interfaceId) public view virtual override returns (bool) {
+        return interfaceId == type(IERC165Upgradeable).interfaceId;
+    }
+
+    /**
+     * @dev This empty reserved space is put in place to allow future versions to add new
+     * variables without shifting down storage in the inheritance chain.
+     * See https://docs.openzeppelin.com/contracts/4.x/upgradeable#storage_gaps
+     */
+    uint256[50] private __gap;
+}
+
+// File: openzeppelin-contracts-upgradeable/contracts/access/AccessControlUpgradeable.sol
+
+
+// OpenZeppelin Contracts (last updated v4.7.0) (access/AccessControl.sol)
 
 pragma solidity ^0.8.0;
 
@@ -1337,107 +1267,57 @@ abstract contract AccessControlUpgradeable is Initializable, ContextUpgradeable,
     uint256[49] private __gap;
 }
 
+// File: contracts/modules/wrapper/optional/AuthorizationModule.sol
 
-// File contracts/modules/security/AuthorizationModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
 
 abstract contract AuthorizationModule is AccessControlUpgradeable {
-    // BurnModule
-    bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
-    // EnforcementModule
-    bytes32 public constant ENFORCER_ROLE = keccak256("ENFORCER_ROLE");
-    // MintModule
-    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
-    // PauseModule
-    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
-    // SnapshotModule
-    bytes32 public constant SNAPSHOOTER_ROLE = keccak256("SNAPSHOOTER_ROLE");
-    // DebtModule
-    bytes32 public constant DEBT_ROLE = keccak256("DEBT_ROLE");
-    // CreditEvents
-    bytes32 public constant DEBT_CREDIT_EVENT_ROLE =
-        keccak256("DEBT_CREDIT_EVENT_ROLE");
-
-    function __AuthorizationModule_init(
-        address admin
-    ) internal onlyInitializing {
+    function __AuthorizationModule_init() internal onlyInitializing {
         /* OpenZeppelin */
         __Context_init_unchained();
         // AccessControlUpgradeable inherits from ERC165Upgradeable
         __ERC165_init_unchained();
         __AccessControl_init_unchained();
 
-        /* own function */
-        __AuthorizationModule_init_unchained(admin);
+       /* own function */
+        __AuthorizationModule_init_unchained();
     }
 
-    /**
-     * @dev Grants the different roles to the
-     * account that deploys the contract.
-     *
-     */
-    function __AuthorizationModule_init_unchained(
-        address admin
-    ) internal onlyInitializing {
-        require(admin != address(0), "Address 0 not allowed");
-        _grantRole(DEFAULT_ADMIN_ROLE, admin);
-    }
-
-    /*
-     * @dev Returns `true` if `account` has been granted `role`.
-     */
-    function hasRole(
-        bytes32 role,
-        address account
-    ) public view virtual override returns (bool) {
-        // The Default Admin has all roles
-        if (AccessControlUpgradeable.hasRole(DEFAULT_ADMIN_ROLE, account)) {
-            return true;
-        }
-        return AccessControlUpgradeable.hasRole(role, account);
+    function __AuthorizationModule_init_unchained() internal onlyInitializing {
+        // no variable to initialize
     }
 
     uint256[50] private __gap;
 }
 
+// File: contracts/modules/security/OnlyDelegateCallModule.sol
 
-// File contracts/modules/security/OnlyDelegateCallModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
-/**
-@dev When a contract is deployed with a proxy, insure that some functions (e.g. delegatecall and selfdestruct) can only be triggered through proxies 
-and not on the implementation contract itself.
-*/
 abstract contract OnlyDelegateCallModule {
     /// @custom:oz-upgrades-unsafe-allow state-variable-immutable state-variable-assignment
     address private immutable self = address(this);
 
     function checkDelegateCall() private view {
-        require(
-            address(this) != self,
-            "Direct call to the implementation not allowed"
-        );
+        require(address(this) != self, "Direct call to the implementation not allowed");
     }
 
     modifier onlyDelegateCall(bool deployedWithProxy) {
-        if (deployedWithProxy) {
+        if(deployedWithProxy){
             checkDelegateCall();
         }
         _;
     }
 }
 
+// File: contracts/modules/wrapper/mandatory/BaseModule.sol
 
-// File contracts/modules/wrapper/mandatory/BaseModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
@@ -1446,22 +1326,14 @@ pragma solidity ^0.8.17;
 
 
 abstract contract BaseModule is AuthorizationModule, OnlyDelegateCallModule {
-    // to initialize inside the implementation constructor when deployed with a Proxy
     bool internal deployedWithProxy;
     /* Events */
-    event Term(string indexed newTermIndexed, string newTerm);
-    event TokenId(string indexed newTokenIdIndexed, string newTokenId);
-    event Information(
-        string indexed newInformationIndexed,
-        string newInformation
-    );
-    event Flag(uint256 indexed newFlag);
+    event TermSet(string indexed newTerm);
+    event TokenIdSet(string indexed newTokenId);
 
     /* Variables */
     string public tokenId;
     string public terms;
-    string public information;
-    uint256 public flag;
 
     /* Initializers */
     /**
@@ -1472,98 +1344,58 @@ abstract contract BaseModule is AuthorizationModule, OnlyDelegateCallModule {
      */
     function __Base_init(
         string memory tokenId_,
-        string memory terms_,
-        string memory information_,
-        uint256 flag_,
-        address admin
+        string memory terms_
     ) internal onlyInitializing {
-        /* OpenZeppelin */
+         /* OpenZeppelin */
         __Context_init_unchained();
-        // AccessControlUpgradeable inherits from ERC165Upgradeable
+         // AccessControlUpgradeable inherits from ERC165Upgradeable
         __ERC165_init_unchained();
         // AuthorizationModule inherits from AccessControlUpgradeable
         __AccessControl_init_unchained();
 
-        /* CMTAT modules */
-        // Security
-        __AuthorizationModule_init_unchained(admin);
+         /* Wrapper */
+        __AuthorizationModule_init_unchained();
 
-        // own function
-        __Base_init_unchained(tokenId_, terms_, information_, flag_);
+        /* own function */
+        __Base_init_unchained(tokenId_, terms_);
     }
 
     function __Base_init_unchained(
         string memory tokenId_,
-        string memory terms_,
-        string memory information_,
-        uint256 flag_
+        string memory terms_
     ) internal onlyInitializing {
         tokenId = tokenId_;
         terms = terms_;
-        information = information_;
-        flag = flag_;
     }
 
     /* Methods */
-    /*
-    @notice the tokenId will be changed even if the new value is the same as the current one
-    */
-    function setTokenId(
-        string memory tokenId_
-    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        tokenId = tokenId_;
-        emit TokenId(tokenId_, tokenId_);
-    }
-
-    /*
-    @notice The terms will be changed even if the new value is the same as the current one
-    */
-    function setTerms(
-        string memory terms_
-    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        terms = terms_;
-        emit Term(terms_, terms_);
-    }
-
-    /*
-    @notice The information will be changed even if the new value is the same as the current one
-    */
-    function setInformation(
-        string memory information_
-    ) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        information = information_;
-        emit Information(information_, information_);
-    }
-
-    /*
-    @notice The call will be reverted if the new value of flag is the same as the current one
-    */
-    function setFlag(uint256 flag_) public onlyRole(DEFAULT_ADMIN_ROLE) {
-        require(flag != flag_, "Same value");
-        flag = flag_;
-        emit Flag(flag_);
-    }
-
-    /**
-    @notice destroys the contract and send the remaining ethers in the contract to the sender
-    Warning: the operation is irreversible, be careful
-    */
-    /// @custom:oz-upgrades-unsafe-allow selfdestruct
-    function kill()
+    function setTokenId(string memory tokenId_)
         public
         onlyRole(DEFAULT_ADMIN_ROLE)
-        onlyDelegateCall(deployedWithProxy)
     {
+        tokenId = tokenId_;
+        emit TokenIdSet(tokenId_);
+    }
+
+    function setTerms(string memory terms_)
+        public
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        terms = terms_;
+        emit TermSet(terms_);
+    }
+
+    /// @custom:oz-upgrades-unsafe-allow selfdestruct
+    function kill() public onlyRole(DEFAULT_ADMIN_ROLE) onlyDelegateCall(deployedWithProxy) {
         selfdestruct(payable(_msgSender()));
     }
 
     uint256[50] private __gap;
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/token/ERC20/IERC20Upgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.6.0) (token/ERC20/IERC20.sol)
 
 pragma solidity ^0.8.0;
@@ -1646,10 +1478,9 @@ interface IERC20Upgradeable {
     ) external returns (bool);
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/IERC20MetadataUpgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/token/ERC20/extensions/IERC20MetadataUpgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
 // OpenZeppelin Contracts v4.4.1 (token/ERC20/extensions/IERC20Metadata.sol)
 
 pragma solidity ^0.8.0;
@@ -1676,11 +1507,10 @@ interface IERC20MetadataUpgradeable is IERC20Upgradeable {
     function decimals() external view returns (uint8);
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/token/ERC20/ERC20Upgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
-// OpenZeppelin Contracts (last updated v4.8.0) (token/ERC20/ERC20.sol)
+// OpenZeppelin Contracts (last updated v4.7.0) (token/ERC20/ERC20.sol)
 
 pragma solidity ^0.8.0;
 
@@ -2079,23 +1909,19 @@ contract ERC20Upgradeable is Initializable, ContextUpgradeable, IERC20Upgradeabl
     uint256[45] private __gap;
 }
 
+// File: contracts/modules/wrapper/mandatory/BurnModule.sol
 
-// File contracts/modules/wrapper/mandatory/BurnModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
 
 
 abstract contract BurnModule is ERC20Upgradeable, AuthorizationModule {
-    event Burn(address indexed owner, uint256 amount, string reason);
+    bytes32 public constant BURNER_ROLE = keccak256("BURNER_ROLE");
+    event Burn(address indexed owner, uint256 amount);
 
-    function __BurnModule_init(
-        string memory name_,
-        string memory symbol_,
-        address admin
-    ) internal onlyInitializing {
+    function __BurnModule_init(string memory name_, string memory symbol_) internal onlyInitializing {
         /* OpenZeppelin */
         __Context_init_unchained();
         __ERC20_init_unchained(name_, symbol_);
@@ -2104,11 +1930,10 @@ abstract contract BurnModule is ERC20Upgradeable, AuthorizationModule {
         // AuthorizationModule inherits from AccessControlUpgradeable
         __AccessControl_init_unchained();
 
-        /* CMTAT modules */
-        // Security
-        __AuthorizationModule_init_unchained(admin);
+        /* Wrapper */
+        __AuthorizationModule_init_unchained();
 
-        // own function
+        /* own function */
         __BurnModule_init_unchained();
     }
 
@@ -2121,116 +1946,70 @@ abstract contract BurnModule is ERC20Upgradeable, AuthorizationModule {
      *
      * See {ERC20-_burn}
      */
-    function forceBurn(
-        address account,
-        uint256 amount,
-        string memory reason
-    ) public onlyRole(BURNER_ROLE) {
-        _burn(account, amount);
-        emit Burn(account, amount, reason);
+    function forceBurn(address from, uint256 amount)
+        public
+        onlyRole(BURNER_ROLE)
+    {
+        _burn(from, amount);
+        emit Burn(from, amount);
     }
 
     uint256[50] private __gap;
 }
 
+// File: contracts/modules/wrapper/mandatory/MintModule.sol
 
-// File contracts/modules/internal/EnforcementModuleInternal.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
 
 
-/**
- * @dev Enforcement module.
- *
- * Allows the issuer to freeze transfers from a given address
- */
-abstract contract EnforcementModuleInternal is
-    Initializable,
-    ContextUpgradeable
-{
-    /**
-     * @notice Emitted when an address is frozen.
-     */
-    event Freeze(
-        address indexed enforcer,
-        address indexed owner,
-        string indexed reasonIndexed,
-        string reason
-    );
+abstract contract MintModule is ERC20Upgradeable, AuthorizationModule {
+    bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
 
-    /**
-     * @notice Emitted when an address is unfrozen.
-     */
-    event Unfreeze(
-        address indexed enforcer,
-        address indexed owner,
-        string indexed reasonIndexed,
-        string reason
-    );
+    event Mint(address indexed beneficiary, uint256 amount);
 
-    mapping(address => bool) private _frozen;
-
-    /**
-     * @dev Initializes the contract
-     */
-    function __Enforcement_init() internal onlyInitializing {
+    function __MintModule_init(string memory name_, string memory symbol_) internal onlyInitializing {
+        /* OpenZeppelin */
         __Context_init_unchained();
-        __Enforcement_init_unchained();
+        __ERC20_init_unchained(name_, symbol_);
+        // AccessControlUpgradeable inherits from ERC165Upgradeable
+        __ERC165_init_unchained();
+        // AuthorizationModule inherits from AccessControlUpgradeable
+        __AccessControl_init_unchained();
+
+        /* Wrapper */
+        __AuthorizationModule_init_unchained();
+
+        /* own function */
+        __MintModule_init_unchained();
     }
 
-    function __Enforcement_init_unchained() internal onlyInitializing {
+    function __MintModule_init_unchained() internal onlyInitializing {
         // no variable to initialize
     }
 
-    /**
-     * @dev Returns true if the account is frozen, and false otherwise.
-     */
-    function frozen(address account) public view virtual returns (bool) {
-        return _frozen[account];
-    }
-
-    /**
-     * @dev Freezes an address.
-     * @param account the account to freeze
-     * @param reason indicate why the account was frozen.
+     /**
+     * @dev Creates `amount` new tokens for `to`.
      *
+     * See {ERC20-_mint}.
+     *
+     * Requirements:
+     *
+     * - the caller must have the `MINTER_ROLE`.
      */
-    function _freeze(
-        address account,
-        string memory reason
-    ) internal virtual returns (bool) {
-        if (_frozen[account]) return false;
-        _frozen[account] = true;
-        emit Freeze(_msgSender(), account, reason, reason);
-        return true;
-    }
-
-    /**
-     * @dev Unfreezes an address.
-     * @param account the account to unfreeze
-     * @param reason indicate why the account was unfrozen.
-     */
-    function _unfreeze(
-        address account,
-        string memory reason
-    ) internal virtual returns (bool) {
-        if (!_frozen[account]) return false;
-        _frozen[account] = false;
-        emit Unfreeze(_msgSender(), account, reason, reason);
-
-        return true;
+    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
+        _mint(to, amount);
+        emit Mint(to, amount);
     }
 
     uint256[50] private __gap;
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/security/PausableUpgradeable.sol
 
-// File openzeppelin-contracts-upgradeable/contracts/security/PausableUpgradeable.sol
 
-// Original license: SPDX_License_Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.7.0) (security/Pausable.sol)
 
 pragma solidity ^0.8.0;
@@ -2346,10 +2125,86 @@ abstract contract PausableUpgradeable is Initializable, ContextUpgradeable {
     uint256[49] private __gap;
 }
 
+// File: contracts/modules/internal/EnforcementModuleInternal.sol
 
-// File contracts/modules/wrapper/mandatory/EnforcementModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
+
+pragma solidity ^0.8.17;
+
+
+
+/**
+ * @dev Enforcement module.
+ *
+ * Allows the issuer to freeze transfers from a given address
+ */
+abstract contract EnforcementModuleInternal is
+    Initializable,
+    ContextUpgradeable
+{
+    /**
+     * @notice Emitted when an address is frozen.
+     */
+    event Freeze(address indexed enforcer, address indexed owner, string indexed reasonIndexed, string reason);
+
+    /**
+     * @notice Emitted when an address is unfrozen.
+     */
+    event Unfreeze(address indexed enforcer, address indexed owner, string indexed reasonIndexed, string reason);
+
+    mapping(address => bool) private _frozen;
+
+    /**
+     * @dev Initializes the contract
+     */
+    function __Enforcement_init() internal onlyInitializing {
+        __Context_init_unchained();
+        __Enforcement_init_unchained();
+    }
+
+    function __Enforcement_init_unchained() internal onlyInitializing {
+        // no variable to initialize
+    }
+
+    /**
+     * @dev Returns true if the account is frozen, and false otherwise.
+     */
+    function frozen(address account) public view virtual returns (bool) {
+        return _frozen[account];
+    }
+
+    /**
+     * @dev Freezes an address.
+     * @param account the account to freeze
+     * @param reason indicate why the account was frozen.
+     *
+     */
+    function _freeze(address account, string memory reason) internal virtual returns (bool) {
+        if (_frozen[account]) return false;
+        _frozen[account] = true;
+        emit Freeze(_msgSender(), account, reason, reason);
+        return true;
+    }
+
+    /**
+     * @dev Unfreezes an address.
+     * @param account the account to unfreeze
+     * @param reason indicate why the account was unfrozen.
+     */
+    function _unfreeze(address account, string memory reason) internal virtual returns (bool) {
+        if (!_frozen[account]) return false;
+        _frozen[account] = false;
+        emit Unfreeze(_msgSender(), account, reason, reason);
+
+        return true;
+    }
+
+    uint256[50] private __gap;
+}
+
+// File: contracts/modules/wrapper/mandatory/EnforcementModule.sol
+
+
 
 pragma solidity ^0.8.17;
 
@@ -2361,17 +2216,14 @@ pragma solidity ^0.8.17;
  *
  * Allows the issuer to freeze transfers from a given address
  */
-abstract contract EnforcementModule is
-    EnforcementModuleInternal,
-    AuthorizationModule
-{
-    string internal constant TEXT_TRANSFER_REJECTED_FROM_FROZEN =
-        "The address FROM is frozen";
+abstract contract EnforcementModule is EnforcementModuleInternal,
+    AuthorizationModule {
 
-    string internal constant TEXT_TRANSFER_REJECTED_TO_FROZEN =
-        "The address TO is frozen";
+    bytes32 public constant ENFORCER_ROLE = keccak256("ENFORCER_ROLE");
+    string internal constant TEXT_TRANSFER_REJECTED_FROZEN =
+        "The address is frozen";
 
-    function __EnforcementModule_init(address admin) internal onlyInitializing {
+    function __EnforcementModule_init() internal onlyInitializing {
         /* OpenZeppelin */
         __Context_init_unchained();
         // AccessControlUpgradeable inherits from ERC165Upgradeable
@@ -2379,14 +2231,13 @@ abstract contract EnforcementModule is
         // AuthorizationModule inherits from AccessControlUpgradeable
         __AccessControl_init_unchained();
 
-        /* CMTAT modules */
-        // Internal
+        /* Internal */
         __Enforcement_init_unchained();
 
-        // Security
-        __AuthorizationModule_init_unchained(admin);
+        /* Wrapper */
+        __AuthorizationModule_init_unchained();
 
-        // own function
+        /* own function */
         __EnforcementModule_init_unchained();
     }
 
@@ -2399,10 +2250,11 @@ abstract contract EnforcementModule is
      * @param account the account to freeze
      * @param reason indicate why the account was frozen.
      */
-    function freeze(
-        address account,
-        string memory reason
-    ) public onlyRole(ENFORCER_ROLE) returns (bool) {
+    function freeze(address account, string memory reason)
+        public
+        onlyRole(ENFORCER_ROLE)
+        returns (bool)
+    {
         return _freeze(account, reason);
     }
 
@@ -2413,20 +2265,20 @@ abstract contract EnforcementModule is
      *
      *
      */
-    function unfreeze(
-        address account,
-        string memory reason
-    ) public onlyRole(ENFORCER_ROLE) returns (bool) {
+    function unfreeze(address account, string memory reason)
+        public
+        onlyRole(ENFORCER_ROLE)
+        returns (bool)
+    {
         return _unfreeze(account, reason);
     }
 
     uint256[50] private __gap;
 }
 
+// File: contracts/modules/wrapper/mandatory/ERC20BaseModule.sol
 
-// File contracts/modules/wrapper/mandatory/ERC20BaseModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
@@ -2452,7 +2304,7 @@ abstract contract ERC20BaseModule is ERC20Upgradeable {
         string memory symbol_,
         uint8 decimals_
     ) internal onlyInitializing {
-        /* OpenZeppelin */
+         /* OpenZeppelin */
         __Context_init_unchained();
         __ERC20_init(name_, symbol_);
 
@@ -2468,8 +2320,7 @@ abstract contract ERC20BaseModule is ERC20Upgradeable {
 
     /* Methods */
     /**
-     * @notice Returns the number of decimals used to get its user representation.
-     * @dev
+     * @dev Returns the number of decimals used to get its user representation.
      * For example, if `decimals` equals `2`, a balance of `505` tokens should
      * be displayed to a user as `5,05` (`505 / 10 ** 2`).
      *
@@ -2504,8 +2355,7 @@ abstract contract ERC20BaseModule is ERC20Upgradeable {
         uint256 amount
     ) public virtual override returns (bool) {
         bool result = super.transferFrom(sender, recipient, amount);
-        // The result will be normally always true because OpenZeppelin uses require to check all the conditions.
-        if (result) {
+        if (result == true) {
             emit Spend(sender, _msgSender(), amount);
         }
 
@@ -2535,64 +2385,732 @@ abstract contract ERC20BaseModule is ERC20Upgradeable {
     uint256[50] private __gap;
 }
 
+// File: openzeppelin-contracts-upgradeable/contracts/utils/StorageSlotUpgradeable.sol
 
-// File contracts/modules/wrapper/mandatory/MintModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
+// OpenZeppelin Contracts (last updated v4.7.0) (utils/StorageSlot.sol)
+
+pragma solidity ^0.8.0;
+
+/**
+ * @dev Library for reading and writing primitive types to specific storage slots.
+ *
+ * Storage slots are often used to avoid storage conflict when dealing with upgradeable contracts.
+ * This library helps with reading and writing to such slots without the need for inline assembly.
+ *
+ * The functions in this library return Slot structs that contain a `value` member that can be used to read or write.
+ *
+ * Example usage to set ERC1967 implementation slot:
+ * ```
+ * contract ERC1967 {
+ *     bytes32 internal constant _IMPLEMENTATION_SLOT = 0x360894a13ba1a3210667c828492db98dca3e2076cc3735a920a3ca505d382bbc;
+ *
+ *     function _getImplementation() internal view returns (address) {
+ *         return StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value;
+ *     }
+ *
+ *     function _setImplementation(address newImplementation) internal {
+ *         require(Address.isContract(newImplementation), "ERC1967: new implementation is not a contract");
+ *         StorageSlot.getAddressSlot(_IMPLEMENTATION_SLOT).value = newImplementation;
+ *     }
+ * }
+ * ```
+ *
+ * _Available since v4.1 for `address`, `bool`, `bytes32`, and `uint256`._
+ */
+library StorageSlotUpgradeable {
+    struct AddressSlot {
+        address value;
+    }
+
+    struct BooleanSlot {
+        bool value;
+    }
+
+    struct Bytes32Slot {
+        bytes32 value;
+    }
+
+    struct Uint256Slot {
+        uint256 value;
+    }
+
+    /**
+     * @dev Returns an `AddressSlot` with member `value` located at `slot`.
+     */
+    function getAddressSlot(bytes32 slot) internal pure returns (AddressSlot storage r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            r.slot := slot
+        }
+    }
+
+    /**
+     * @dev Returns an `BooleanSlot` with member `value` located at `slot`.
+     */
+    function getBooleanSlot(bytes32 slot) internal pure returns (BooleanSlot storage r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            r.slot := slot
+        }
+    }
+
+    /**
+     * @dev Returns an `Bytes32Slot` with member `value` located at `slot`.
+     */
+    function getBytes32Slot(bytes32 slot) internal pure returns (Bytes32Slot storage r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            r.slot := slot
+        }
+    }
+
+    /**
+     * @dev Returns an `Uint256Slot` with member `value` located at `slot`.
+     */
+    function getUint256Slot(bytes32 slot) internal pure returns (Uint256Slot storage r) {
+        /// @solidity memory-safe-assembly
+        assembly {
+            r.slot := slot
+        }
+    }
+}
+
+// File: openzeppelin-contracts-upgradeable/contracts/utils/ArraysUpgradeable.sol
+
+
+// OpenZeppelin Contracts v4.4.1 (utils/Arrays.sol)
+
+pragma solidity ^0.8.0;
+
+
+/**
+ * @dev Collection of functions related to array types.
+ */
+library ArraysUpgradeable {
+    using StorageSlotUpgradeable for bytes32;
+
+    /**
+     * @dev Searches a sorted `array` and returns the first index that contains
+     * a value greater or equal to `element`. If no such index exists (i.e. all
+     * values in the array are strictly less than `element`), the array length is
+     * returned. Time complexity O(log n).
+     *
+     * `array` is expected to be sorted in ascending order, and to contain no
+     * repeated elements.
+     */
+    function findUpperBound(uint256[] storage array, uint256 element) internal view returns (uint256) {
+        if (array.length == 0) {
+            return 0;
+        }
+
+        uint256 low = 0;
+        uint256 high = array.length;
+
+        while (low < high) {
+            uint256 mid = MathUpgradeable.average(low, high);
+
+            // Note that mid will always be strictly less than high (i.e. it will be a valid array index)
+            // because Math.average rounds down (it does integer division with truncation).
+            if (unsafeAccess(array, mid).value > element) {
+                high = mid;
+            } else {
+                low = mid + 1;
+            }
+        }
+
+        // At this point `low` is the exclusive upper bound. We will return the inclusive upper bound.
+        if (low > 0 && unsafeAccess(array, low - 1).value == element) {
+            return low - 1;
+        } else {
+            return low;
+        }
+    }
+
+    /**
+     * @dev Access an array in an "unsafe" way. Skips solidity "index-out-of-range" check.
+     *
+     * WARNING: Only use if you are certain `pos` is lower than the array length.
+     */
+    function unsafeAccess(address[] storage arr, uint256 pos) internal pure returns (StorageSlotUpgradeable.AddressSlot storage) {
+        bytes32 slot;
+        // We use assembly to calculate the storage slot of the element at index `pos` of the dynamic array `arr`
+        // following https://docs.soliditylang.org/en/v0.8.17/internals/layout_in_storage.html#mappings-and-dynamic-arrays.
+
+        /// @solidity memory-safe-assembly
+        assembly {
+            mstore(0, arr.slot)
+            slot := add(keccak256(0, 0x20), pos)
+        }
+        return slot.getAddressSlot();
+    }
+
+    /**
+     * @dev Access an array in an "unsafe" way. Skips solidity "index-out-of-range" check.
+     *
+     * WARNING: Only use if you are certain `pos` is lower than the array length.
+     */
+    function unsafeAccess(bytes32[] storage arr, uint256 pos) internal pure returns (StorageSlotUpgradeable.Bytes32Slot storage) {
+        bytes32 slot;
+        // We use assembly to calculate the storage slot of the element at index `pos` of the dynamic array `arr`
+        // following https://docs.soliditylang.org/en/v0.8.17/internals/layout_in_storage.html#mappings-and-dynamic-arrays.
+
+        /// @solidity memory-safe-assembly
+        assembly {
+            mstore(0, arr.slot)
+            slot := add(keccak256(0, 0x20), pos)
+        }
+        return slot.getBytes32Slot();
+    }
+
+    /**
+     * @dev Access an array in an "unsafe" way. Skips solidity "index-out-of-range" check.
+     *
+     * WARNING: Only use if you are certain `pos` is lower than the array length.
+     */
+    function unsafeAccess(uint256[] storage arr, uint256 pos) internal pure returns (StorageSlotUpgradeable.Uint256Slot storage) {
+        bytes32 slot;
+        // We use assembly to calculate the storage slot of the element at index `pos` of the dynamic array `arr`
+        // following https://docs.soliditylang.org/en/v0.8.17/internals/layout_in_storage.html#mappings-and-dynamic-arrays.
+
+        /// @solidity memory-safe-assembly
+        assembly {
+            mstore(0, arr.slot)
+            slot := add(keccak256(0, 0x20), pos)
+        }
+        return slot.getUint256Slot();
+    }
+}
+
+// File: contracts/modules/internal/SnapshotModuleInternal.sol
+
+
 
 pragma solidity ^0.8.17;
 
 
 
-abstract contract MintModule is ERC20Upgradeable, AuthorizationModule {
-    event Mint(address indexed beneficiary, uint256 amount);
 
-    function __MintModule_init(
-        string memory name_,
-        string memory symbol_,
-        address admin
-    ) internal onlyInitializing {
+/**
+ * @dev Snapshot module.
+ *
+ * Useful to take a snapshot of token holder balance and total supply at a specific time
+ * Inspired by Openzeppelin - ERC20Snapshot but use the time as Id instead of a counter.
+ * Contrary to OpenZeppelin, the function _getCurrentSnapshotId is not available
+   because overriding this function can break the contract.
+ */
+
+abstract contract SnapshotModuleInternal is
+    ERC20Upgradeable
+{
+    using ArraysUpgradeable for uint256[];
+
+    /**
+    @notice Emitted when the snapshot with the specified oldTime was scheduled or rescheduled at the specified newTime.
+    */
+    event SnapshotSchedule(uint256 indexed oldTime, uint256 indexed newTime);
+
+    /**
+    @notice Emitted when the scheduled snapshot with the specified time was cancelled.
+    */
+    event SnapshotUnschedule(uint256 indexed time);
+
+    /**
+    @dev See {OpenZeppelin - ERC20Snapshot}
+    Snapshotted values have arrays of ids (time) and the value corresponding to that id.
+    ids is expected to be sorted in ascending order, and to contain no repeated elements
+    because we use findUpperBound in the function _valueAt
+    */
+    struct Snapshots {
+        uint256[] ids;
+        uint256[] values;
+    }
+
+    /**
+    @dev See {OpenZeppelin - ERC20Snapshot}
+    */
+    mapping(address => Snapshots) private _accountBalanceSnapshots;
+    Snapshots private _totalSupplySnapshots;
+
+    /**
+    @dev time instead of a counter for OpenZeppelin
+    */
+    uint256 private _currentSnapshotTime;
+    uint256 private _currentSnapshotIndex;
+
+    /**
+    @dev
+    list of scheduled snapshot (time)
+    This list is sorted in ascending order
+    */
+    uint256[] private _scheduledSnapshots;
+
+    /**
+     * @dev Initializes the contract
+     */
+    function __Snapshot_init(string memory name_, string memory symbol_) internal onlyInitializing {
+        __Context_init_unchained();
+        __ERC20_init(name_, symbol_);
+        __Snapshot_init_unchained();
+    }
+
+    function __Snapshot_init_unchained() internal onlyInitializing{
+        _currentSnapshotTime = 0;
+        _currentSnapshotIndex = 0;
+    }
+
+    /**
+    @dev schedule a snapshot at the specified time
+    You can only add a snapshot after the last previous
+    */
+    function _scheduleSnapshot(uint256 time) internal {
+        // Check the time firstly to avoid an useless read of storage
+        require(time > block.timestamp, "Snapshot scheduled in the past");
+
+        if(_scheduledSnapshots.length > 0) {
+            // We check the last snapshot on the list
+            require(time > _scheduledSnapshots[_scheduledSnapshots.length -1], "time has to be greater than the last snapshot time");
+        }
+        _scheduledSnapshots.push(time);
+        emit SnapshotSchedule(0, time);
+    }
+
+    /**
+    @dev schedule a snapshot at the specified time
+    */
+    function _scheduleSnapshotNotOptimized(uint256 time) internal {
+        require(time > block.timestamp, "Snapshot scheduled in the past");
+        (bool isFound, uint256 index) = _findScheduledSnapshotIndex(time);
+        // Perfect match
+        require(!isFound, "Snapshot already exists");
+        // if no upper bound match found, we push the snapshot at the end of the list
+        if(index == _scheduledSnapshots.length) {
+             _scheduledSnapshots.push(time);
+        }else{
+            _scheduledSnapshots.push(_scheduledSnapshots[_scheduledSnapshots.length - 1]);
+            for(uint256 i = _scheduledSnapshots.length - 2; i > index;) {
+            _scheduledSnapshots[i] = _scheduledSnapshots[i - 1];
+                unchecked {--i;}
+            }
+            _scheduledSnapshots[index] = time;
+        }
+        emit SnapshotSchedule(0, time);
+    }
+
+    /**
+    @dev reschedule a scheduled snapshot at the specified newTime
+    */
+    function _rescheduleSnapshot(uint256 oldTime, uint256 newTime)
+        internal
+    {
+        // Check the time firstly to avoid an useless read of storage
+        require(oldTime > block.timestamp, "Snapshot already done");
+        require(newTime > block.timestamp, "Snapshot scheduled in the past");
+        require(_scheduledSnapshots.length > 0, "no scheduled snapshot");
+
+        (bool foundOld, uint256 index) = _findScheduledSnapshotIndex(oldTime);
+        require(foundOld, "Snapshot not found");
+
+        if(index + 1 <  _scheduledSnapshots.length) {
+            require(newTime < _scheduledSnapshots[index + 1], "time has to be less than the next snapshot");
+        }
+
+        if(index > 0) {
+            require(newTime > _scheduledSnapshots[index - 1], "time has to be greater than the previous snapshot");
+        }
+
+        _scheduledSnapshots[index] = newTime;
+
+        emit SnapshotSchedule(oldTime, newTime);
+    }
+
+    /**
+    @dev unschedule the last scheduled snapshot
+    */
+    function _unscheduleLastSnapshot(uint256 time) internal {
+        // Check the time firstly to avoid an useless read of storage
+        require(time > block.timestamp, "Snapshot already done");
+        require(_scheduledSnapshots.length > 0, "No snapshot scheduled");
+        // All snapshot time are unique, so we do not check the indice
+        require(time == _scheduledSnapshots[ _scheduledSnapshots.length - 1],
+        "Only the last snapshot can be unscheduled");
+        _scheduledSnapshots.pop();
+        emit SnapshotUnschedule(time);
+    }
+
+    /**
+    @dev unschedule (remove) a scheduled snapshot in three steps:
+    - search the snapshot in the list
+    - If found, move all next snapshots one position to the left
+    - Reduce the array size by deleting the last snapshot
+    */
+    function _unscheduleSnapshotNotOptimized(uint256 time) internal {
+        require(time > block.timestamp, "Snapshot already done");
+        (bool isFound, uint256 index) = _findScheduledSnapshotIndex(time);
+        require(isFound, "Snapshot not found");
+        for(uint256 i = index; i + 1 < _scheduledSnapshots.length;){
+            _scheduledSnapshots[i] = _scheduledSnapshots[i + 1];
+             unchecked {++i;}
+        }
+        _scheduledSnapshots.pop();
+    }
+
+    /**
+    @dev
+    Get the next scheduled snapshots
+    */
+    function getNextSnapshots() public view returns (uint256[] memory) {
+        uint256[] memory nextScheduledSnapshot = new uint256[](0);
+        // no snapshot were planned
+        if(_scheduledSnapshots.length > 0){
+            (uint256 timeLowerBound, uint256 indexLowerBound) = _findScheduledMostRecentPastSnapshot();
+            // All snapshots are situated in the futur
+            if((timeLowerBound == 0) && (_currentSnapshotTime == 0)){
+                return _scheduledSnapshots;
+            } else{
+            // There are snapshots situated in the futur
+                if(indexLowerBound + 1 != _scheduledSnapshots.length){
+                    // All next snapshots are located after the snapshot specified by indexLowerBound
+                    uint256 arraySize = _scheduledSnapshots.length - indexLowerBound - 1;
+                    nextScheduledSnapshot = new uint256[](arraySize);
+                    for(uint256 i = 0; i < nextScheduledSnapshot.length; ++i){
+                        nextScheduledSnapshot[i] = _scheduledSnapshots[indexLowerBound + 1 + i];
+                    }
+                }
+            }
+        }
+        return nextScheduledSnapshot;
+    }
+
+    /**
+    @dev
+    Get all snapshots
+    */
+    function getAllSnapshots() public view returns (uint256[] memory) {
+        return _scheduledSnapshots;
+    }
+
+
+    /**
+    @notice Return the number of tokens owned by the given owner at the time when the snapshot with the given time was created.
+    @return value stored in the snapshot, or the actual balance if no snapshot
+    */
+    function snapshotBalanceOf(uint256 time, address owner)
+        public
+        view
+        returns (uint256)
+    {
+        (bool snapshotted, uint256 value) = _valueAt(
+            time,
+            _accountBalanceSnapshots[owner]
+        );
+
+        return snapshotted ? value : balanceOf(owner);
+    }
+
+    /**
+    @dev See {OpenZeppelin - ERC20Snapshot}
+    Retrieves the total supply at the specified time.
+    @return value stored in the snapshot, or the actual totalSupply if no snapshot
+    */
+    function snapshotTotalSupply(uint256 time) public view returns (uint256) {
+        (bool snapshotted, uint256 value) = _valueAt(
+            time,
+            _totalSupplySnapshots
+        );
+        return snapshotted ? value : totalSupply();
+    }
+
+    /**
+    @dev Update balance and/or total supply snapshots before the values are modified. This is implemented
+    in the _beforeTokenTransfer hook, which is executed for _mint, _burn, and _transfer operations.
+    */
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal virtual override {
+        super._beforeTokenTransfer(from, to, amount);
+
+        _setCurrentSnapshot();
+        if (from != address(0)) {
+            // for both burn and transfer
+            _updateAccountSnapshot(from);
+            if (to != address(0)) {
+                // transfer
+                _updateAccountSnapshot(to);
+            } else {
+                // burn
+                _updateTotalSupplySnapshot();
+            }
+        } else {
+            // mint
+            _updateAccountSnapshot(to);
+            _updateTotalSupplySnapshot();
+        }
+    }
+
+    /**
+    @dev See {OpenZeppelin - ERC20Snapshot}
+    @param time where we want a snapshot
+    @param snapshots the struct where are stored the snapshots
+    @return  snapshotExist true if a snapshot is found, false otherwise
+    value 0 if no snapshot, balance value if a snapshot exists
+    */
+    function _valueAt(uint256 time, Snapshots storage snapshots)
+        private
+        view
+        returns (bool snapshotExist, uint256 value)
+    {
+        // When a valid snapshot is queried, there are three possibilities:
+        //  a) The queried value was not modified after the snapshot was taken. Therefore, a snapshot entry was never
+        //  created for this id, and all stored snapshot ids are smaller than the requested one. The value that corresponds
+        //  to this id is the current one.
+        //  b) The queried value was modified after the snapshot was taken. Therefore, there will be an entry with the
+        //  requested id, and its value is the one to return.
+        //  c) More snapshots were created after the requested one, and the queried value was later modified. There will be
+        //  no entry for the requested id: the value that corresponds to it is that of the smallest snapshot id that is
+        //  larger than the requested one.
+        //
+        // In summary, we need to find an element in an array, returning the index of the smallest value that is larger if
+        // it is not found, unless said value doesn't exist (e.g. when all values are smaller). Arrays.findUpperBound does
+        // exactly this.
+
+        uint256 index = snapshots.ids.findUpperBound(time);
+
+        if (index == snapshots.ids.length) {
+            return (false, 0);
+        } else {
+            return (true, snapshots.values[index]);
+        }
+    }
+
+    /**
+    @dev See {OpenZeppelin - ERC20Snapshot}
+    */
+    function _updateAccountSnapshot(address account) private {
+        _updateSnapshot(_accountBalanceSnapshots[account], balanceOf(account));
+    }
+
+    /**
+    @dev See {OpenZeppelin - ERC20Snapshot}
+    */
+    function _updateTotalSupplySnapshot() private {
+        _updateSnapshot(_totalSupplySnapshots, totalSupply());
+    }
+
+    /**
+    @dev
+    Inside a struct Snapshots:
+    - Update the array ids to the current Snapshot time if this one is greater than the snapshot times stored in ids.
+    - Update the value to the corresponding value.
+    */
+    function _updateSnapshot(Snapshots storage snapshots, uint256 currentValue)
+        private
+    {
+        uint256 current = _currentSnapshotTime;
+        if (_lastSnapshot(snapshots.ids) < current) {
+            snapshots.ids.push(current);
+            snapshots.values.push(currentValue);
+        }
+    }
+
+    /**
+    @dev
+    Set the currentSnapshotTime by retrieving the most recent snapshot
+    if a snapshot exists, clear all past scheduled snapshot
+    */
+    function _setCurrentSnapshot() internal {
+        (uint256 scheduleSnapshotTime, uint256 scheduleSnapshotIndex) = _findScheduledMostRecentPastSnapshot();
+        if (scheduleSnapshotTime > 0) {
+            _currentSnapshotTime = scheduleSnapshotTime;
+            _currentSnapshotIndex = scheduleSnapshotIndex;
+        }
+    }
+
+    /**
+    @return the last snapshot time inside a snapshot ids array
+    */
+    function _lastSnapshot(uint256[] storage ids)
+        private
+        view
+        returns (uint256)
+    {
+        if (ids.length == 0) {
+            return 0;
+        } else {
+            return ids[ids.length - 1];
+        }
+    }
+
+    /**
+    @dev Find the snapshot index at the specified time
+    @return (true, index) if the snapshot exists, (false, 0) otherwise
+    */
+    function _findScheduledSnapshotIndex(uint256 time)
+        private
+        view
+        returns (bool, uint256)
+    {
+         uint256 indexFound =_scheduledSnapshots.findUpperBound(time);
+         // Exact match
+         if(indexFound != _scheduledSnapshots.length &&
+         _scheduledSnapshots[indexFound] == time ){
+            return (true, indexFound);
+         } // Upper bound match
+         else if(indexFound != _scheduledSnapshots.length){
+             return (false, indexFound);
+         } // no match
+         else{
+             return (false, _scheduledSnapshots.length);
+         }
+    }
+
+    /**
+    @dev find the most recent past snapshot
+    The complexity of this function is O(N) because we go through the whole list
+    */
+    function _findScheduledMostRecentPastSnapshot()
+        private
+        view
+        returns (uint256 time, uint256 index)
+    {
+        uint256 currentArraySize =  _scheduledSnapshots.length;
+        // no snapshot or the current snapshot already points on the last snapshot
+        if (currentArraySize == 0 ||
+            ((_currentSnapshotIndex + 1 == currentArraySize)
+            && (time != 0))){
+            return (0, currentArraySize);
+        }
+        uint256 mostRecent = 0;
+        index = currentArraySize;
+        for (uint256 i = _currentSnapshotIndex; i < currentArraySize; ++i) {
+            if (
+                _scheduledSnapshots[i] <= block.timestamp
+            ) {
+
+                mostRecent = _scheduledSnapshots[i];
+                index = i;
+            }else {
+                // All snapshot are planned in the futur
+                break;
+            }
+        }
+        return (mostRecent, index);
+    }
+
+    uint256[50] private __gap;
+}
+
+// File: contracts/modules/wrapper/mandatory/SnapshotModule.sol
+
+
+
+pragma solidity ^0.8.17;
+
+
+
+/**
+ * @dev Snapshot module.
+ *
+ * Useful to take a snapshot of token holder balance and total supply at a specific time
+ */
+abstract contract SnapshotModule is SnapshotModuleInternal, AuthorizationModule {
+    bytes32 public constant SNAPSHOOTER_ROLE = keccak256("SNAPSHOOTER_ROLE");
+
+    function __SnasphotModule_init(string memory name_, string memory symbol_) internal onlyInitializing {
         /* OpenZeppelin */
         __Context_init_unchained();
+        // SnapshotModuelInternal inherits from ERC20
         __ERC20_init_unchained(name_, symbol_);
         // AccessControlUpgradeable inherits from ERC165Upgradeable
         __ERC165_init_unchained();
         // AuthorizationModule inherits from AccessControlUpgradeable
         __AccessControl_init_unchained();
 
-        /* CMTAT modules */
-        // Security
-        __AuthorizationModule_init_unchained(admin);
+        /* Internal */
+        __Snapshot_init_unchained();
 
-        // own function
-        __MintModule_init_unchained();
+        /* Wrapper */
+        __AuthorizationModule_init_unchained();
+
+        /* own function */
+        __SnasphotModule_init_unchained();
+
     }
 
-    function __MintModule_init_unchained() internal onlyInitializing {
+    function __SnasphotModule_init_unchained() internal onlyInitializing {
         // no variable to initialize
     }
 
-    /**
-     * @dev Creates `amount` new tokens for `to`.
-     *
-     * See {ERC20-_mint}.
-     *
-     * Requirements:
-     *
-     * - the caller must have the `MINTER_ROLE`.
-     */
-    function mint(address to, uint256 amount) public onlyRole(MINTER_ROLE) {
-        _mint(to, amount);
-        emit Mint(to, amount);
+    /*
+    @notice
+    Schedule a snapshot at the given time specified as a number of seconds since epoch.
+    The time cannot be before the time of the latest scheduled, but not yet created snapshot.
+    */
+    function scheduleSnapshot(uint256 time)
+        public
+        onlyRole(SNAPSHOOTER_ROLE)
+    {
+        _scheduleSnapshot(time);
     }
+
+    /*
+    @notice
+    Schedule a snapshot at the given time specified as a number of seconds since epoch.
+    The time cannot be before the time of the latest scheduled, but not yet created snapshot.
+    */
+    function scheduleSnapshotNotOptimized(uint256 time)
+        public
+        onlyRole(SNAPSHOOTER_ROLE)
+    {
+        _scheduleSnapshotNotOptimized(time);
+    }
+
+    /*
+    @notice
+    Reschedule the scheduled snapshot, but not yet created snapshot with the given oldTime to be created at the given newTime specified as a number of seconds since epoch.
+    The newTime cannot be before the time of the previous scheduled, but not yet created snapshot, or after the time fo the next scheduled snapshot.
+    */
+    function rescheduleSnapshot(uint256 oldTime, uint256 newTime)
+        public
+        onlyRole(SNAPSHOOTER_ROLE)
+    {
+        _rescheduleSnapshot(oldTime, newTime);
+    }
+
+    /*
+    @notice
+    Cancel creation of the scheduled snapshot, but not yet created snapshot with the given time.
+    There should not be any other snapshots scheduled after this one.
+    */
+    function unscheduleLastSnapshot(uint256 time)
+        public
+        onlyRole(SNAPSHOOTER_ROLE)
+    {
+        _unscheduleLastSnapshot(time);
+    }
+
+    /*
+    @notice
+    Cancel creation of the scheduled snapshot, but not yet created snapshot with the given time.
+
+    */
+    function unscheduleSnapshotNotOptimized(uint256 time)
+        public
+        onlyRole(SNAPSHOOTER_ROLE)
+    {
+        _unscheduleSnapshotNotOptimized(time);
+    }
+
+
 
     uint256[50] private __gap;
 }
 
+// File: contracts/modules/wrapper/mandatory/PauseModule.sol
 
-// File contracts/modules/wrapper/mandatory/PauseModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
@@ -2606,10 +3124,11 @@ pragma solidity ^0.8.17;
  * event of a large bug.
  */
 abstract contract PauseModule is PausableUpgradeable, AuthorizationModule {
+    bytes32 public constant PAUSER_ROLE = keccak256("PAUSER_ROLE");
     string internal constant TEXT_TRANSFER_REJECTED_PAUSED =
         "All transfers paused";
 
-    function __PauseModule_init(address admin) internal onlyInitializing {
+    function __PauseModule_init() internal onlyInitializing {
         /* OpenZeppelin */
         __Context_init_unchained();
         __Pausable_init_unchained();
@@ -2618,11 +3137,10 @@ abstract contract PauseModule is PausableUpgradeable, AuthorizationModule {
         // AuthorizationModule inherits from AccessControlUpgradeable
         __AccessControl_init_unchained();
 
-        /* CMTAT modules */
-        // Security
-        __AuthorizationModule_init_unchained(admin);
+        /* Wrapper */
+        __AuthorizationModule_init_unchained();
 
-        // own function
+        /* own function */
         __PauseModule_init_unchained();
     }
 
@@ -2659,392 +3177,274 @@ abstract contract PauseModule is PausableUpgradeable, AuthorizationModule {
     uint256[50] private __gap;
 }
 
+// File: contracts/interfaces/IERC1404.sol
 
-// File contracts/interfaces/IDebtGlobal.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.17;
 
-interface IDebtGlobal {
-    struct DebtBase {
-        uint256 interestRate;
-        uint256 parValue;
-        string guarantor;
-        string bondHolder;
-        string maturityDate;
-        string interestScheduleFormat;
-        string interestPaymentDate;
-        string dayCountConvention;
-        string businessDayConvention;
-        string publicHolidaysCalendar;
-        string issuanceDate;
-        string couponFrequency;
-    }
 
-    struct CreditEvents {
-        bool flagDefault;
-        bool flagRedeemed;
-        string rating;
-    }
+interface IERC1404 {
+    /**
+     * @dev See ERC-1404
+     *
+     */
+    function detectTransferRestriction(
+        address _from,
+        address _to,
+        uint256 _amount
+    ) external view returns (uint8);
+
+    /**
+     * @dev See ERC-1404
+     *
+     */
+    function messageForTransferRestriction(uint8 _restrictionCode)
+        external
+        view
+        returns (string memory);
 }
 
+// File: contracts/interfaces/IERC1404Wrapper.sol
 
-// File contracts/modules/wrapper/optional/DebtModule/CreditEventsModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
+
+pragma solidity ^0.8.17;
+
+interface IERC1404Wrapper is IERC1404 {
+    /**
+     * @dev Returns true if the transfer is valid, and false otherwise.
+     */
+    function validateTransfer(
+        address _from,
+        address _to,
+        uint256 _amount
+    ) external view returns (bool isValid);
+}
+
+// File: contracts/interfaces/IRule.sol
+
+
+
+pragma solidity ^0.8.17;
+
+interface IRule is IERC1404Wrapper {
+     /**
+     * @dev Returns true if the restriction code exists, and false otherwise.
+     */
+     function canReturnTransferRestrictionCode(uint8 _restrictionCode)
+        external
+        view
+        returns (bool);
+}
+
+// File: contracts/interfaces/IRuleEngine.sol
+
+
+
+pragma solidity ^0.8.17;
+
+
+interface IRuleEngine is IERC1404Wrapper{
+    /**
+    * @dev define the rules, the precedent rules will be overwritten
+    */
+    function setRules(IRule[] calldata rules_) external;
+
+    /**
+    * @dev return the number of rules
+    */
+    function ruleLength() external view returns (uint256);
+
+    /**
+    * @dev return the rule at the index specified by ruleId
+    */
+    function rule(uint256 ruleId) external view returns (IRule);
+
+    /**
+    * @dev return all the rules
+    */
+    function rules() external view returns (IRule[] memory);
+}
+
+// File: contracts/modules/internal/ValidationModuleInternal.sol
+
+
+
+pragma solidity ^0.8.17;
+
+
+
+/**
+ * @dev Validation module.
+ *
+ * Useful for to restrict and validate transfers
+ */
+abstract contract ValidationModuleInternal is Initializable, ContextUpgradeable {
+    /**
+     * @dev Emitted when a rule engine is set.
+     */
+    event RuleEngineSet(address indexed newRuleEngine);
+
+    IRuleEngine public ruleEngine;
+
+    /**
+     * @dev Initializes the contract with rule engine.
+     */
+    function __Validation_init(IRuleEngine ruleEngine_) internal onlyInitializing {
+        __Context_init_unchained();
+        __Validation_init_unchained(ruleEngine_);
+    }
+
+    function __Validation_init_unchained(IRuleEngine ruleEngine_)
+        internal
+        onlyInitializing
+    {
+        if (address(ruleEngine_) != address(0)) {
+            ruleEngine = ruleEngine_;
+            emit RuleEngineSet(address(ruleEngine));
+        }
+    }
+
+    function _validateTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) internal view returns (bool) {
+        return ruleEngine.validateTransfer(from, to, amount);
+    }
+
+    function _messageForTransferRestriction(uint8 restrictionCode)
+        internal
+        view
+        returns (string memory)
+    {
+        return ruleEngine.messageForTransferRestriction(restrictionCode);
+    }
+
+    function _detectTransferRestriction(
+        address from,
+        address to,
+        uint256 amount
+    ) internal view returns (uint8) {
+        return ruleEngine.detectTransferRestriction(from, to, amount);
+    }
+
+    uint256[50] private __gap;
+}
+
+// File: contracts/modules/wrapper/optional/ValidationModule.sol
+
+
 
 pragma solidity ^0.8.17;
 
 
 
 
-abstract contract CreditEventsModule is
-    IDebtGlobal,
-    Initializable,
-    ContextUpgradeable,
-    AuthorizationModule
-{
-    CreditEvents public creditEvents;
 
-    /* Events */
-    event FlagDefault(bool indexed newFlagDefault);
-    event FlagRedeemed(bool indexed newFlagRedeemed);
-    event Rating(string indexed newRatingIndexed, string newRating);
+/**
+ * @dev Validation module.
+ *
+ * Useful for to restrict and validate transfers
+ */
+abstract contract ValidationModule is ValidationModuleInternal, PauseModule, EnforcementModule, IERC1404Wrapper {
+    enum REJECTED_CODE { TRANSFER_OK, TRANSFER_REJECTED_PAUSED, TRANSFER_REJECTED_FROZEN }
+    string constant TEXT_TRANSFER_OK = "No restriction";
 
-    function __CreditEvents_init(address admin) internal onlyInitializing {
+    function __ValidationModule_init(IRuleEngine ruleEngine_) internal onlyInitializing {
         /* OpenZeppelin */
         __Context_init_unchained();
-
         // AccessControlUpgradeable inherits from ERC165Upgradeable
         __ERC165_init_unchained();
-        // AuthorizationModule inherits from AccessControlUpgradeable
         __AccessControl_init_unchained();
+        __Pausable_init_unchained();
 
-        /* CMTAT modules */
-        // Security
-        __AuthorizationModule_init_unchained(admin);
+        /* Internal */
+        __Validation_init_unchained(ruleEngine_);
 
-        // own function
-        __CreditEvents_init_unchained();
+        /* Wrapper */
+        __AuthorizationModule_init_unchained();
+        __PauseModule_init_unchained();
+        __EnforcementModule_init_unchained();
+
+        /* own function */
+        __ValidationModule_init_unchained();
     }
 
-    function __CreditEvents_init_unchained() internal onlyInitializing {
+    function __ValidationModule_init_unchained() internal onlyInitializing {
         // no variable to initialize
     }
 
-    /*
-    @notice Set all attributes of creditEvents
-    The values of all attributes will be changed even if the new values are the same as the current ones
-    */
-    function setCreditEvents(
-        bool flagDefault_,
-        bool flagRedeemed_,
-        string memory rating_
-    ) public onlyRole(DEBT_CREDIT_EVENT_ROLE) {
-        creditEvents = (CreditEvents(flagDefault_, flagRedeemed_, rating_));
-        emit FlagDefault(flagDefault_);
-        emit FlagRedeemed(flagRedeemed_);
-        emit Rating(rating_, rating_);
+    function setRuleEngine(IRuleEngine ruleEngine_)
+        external
+        onlyRole(DEFAULT_ADMIN_ROLE)
+    {
+        ruleEngine = ruleEngine_;
+        emit RuleEngineSet(address(ruleEngine_));
     }
 
-    /*
-    @notice The call will be reverted if the new value of flagDefault is the same as the current one
-    */
-    function setFlagDefault(
-        bool flagDefault_
-    ) public onlyRole(DEBT_CREDIT_EVENT_ROLE) {
-        require(flagDefault_ != creditEvents.flagDefault, "Same value");
-        creditEvents.flagDefault = flagDefault_;
-        emit FlagDefault(flagDefault_);
+    /**
+     * @dev ERC1404 check if _value token can be transferred from _from to _to
+     * @param from address The address which you want to send tokens from
+     * @param to address The address which you want to transfer to
+     * @param amount uint256 the amount of tokens to be transferred
+     * @return code of the rejection reason
+     */
+    function detectTransferRestriction(
+        address from,
+        address to,
+        uint256 amount
+    ) public view override returns (uint8 code) {
+        if (paused()) {
+            return uint8(REJECTED_CODE.TRANSFER_REJECTED_PAUSED);
+        } else if (frozen(from)) {
+            return uint8(REJECTED_CODE.TRANSFER_REJECTED_FROZEN);
+        } else if (address(ruleEngine) != address(0)) {
+            return _detectTransferRestriction(from, to, amount);
+        }
+        return uint8(REJECTED_CODE.TRANSFER_OK);
     }
 
-    /*
-    @notice The call will be reverted if the new value of flagRedeemed is the same as the current one
-    */
-    function setFlagRedeemed(
-        bool flagRedeemed_
-    ) public onlyRole(DEBT_CREDIT_EVENT_ROLE) {
-        require(flagRedeemed_ != creditEvents.flagRedeemed, "Same value");
-        creditEvents.flagRedeemed = flagRedeemed_;
-        emit FlagRedeemed(flagRedeemed_);
+    /**
+     * @dev ERC1404 returns the human readable explaination corresponding to the error code returned by detectTransferRestriction
+     * @param restrictionCode The error code returned by detectTransferRestriction
+     * @return message The human readable explaination corresponding to the error code returned by detectTransferRestriction
+     */
+    function messageForTransferRestriction(uint8 restrictionCode)
+        external
+        view
+        override
+        returns (string memory message)
+    {
+        if (restrictionCode == uint8(REJECTED_CODE.TRANSFER_OK)) {
+            return TEXT_TRANSFER_OK;
+        } else if (restrictionCode == uint8(REJECTED_CODE.TRANSFER_REJECTED_PAUSED)) {
+            return TEXT_TRANSFER_REJECTED_PAUSED;
+        } else if (restrictionCode == uint8(REJECTED_CODE.TRANSFER_REJECTED_FROZEN)) {
+            return TEXT_TRANSFER_REJECTED_FROZEN;
+        } else if (address(ruleEngine) != address(0)) {
+            return _messageForTransferRestriction(restrictionCode);
+        }
     }
 
-    /*
-    @notice The rating will be changed even if the new value is the same as the current one
-    */
-    function setRating(
-        string memory rating_
-    ) public onlyRole(DEBT_CREDIT_EVENT_ROLE) {
-        creditEvents.rating = rating_;
-        emit Rating(rating_, rating_);
+    function validateTransfer(
+        address from,
+        address to,
+        uint256 amount
+    ) public view override returns (bool) {
+         if (address(ruleEngine) != address(0)) {
+            return _validateTransfer(from, to, amount);
+        }
+        return true;
     }
 
     uint256[50] private __gap;
 }
 
-
-// File contracts/modules/wrapper/optional/DebtModule/DebtBaseModule.sol
-
-// Original license: SPDX_License_Identifier: MPL-2.0
-
-pragma solidity ^0.8.17;
+// File: openzeppelin-contracts-upgradeable/contracts/metatx/ERC2771ContextUpgradeable.sol
 
 
-
-
-abstract contract DebtBaseModule is
-    IDebtGlobal,
-    Initializable,
-    ContextUpgradeable,
-    AuthorizationModule
-{
-    DebtBase public debt;
-
-    /* Events */
-    event InterestRate(uint256 newInterestRate);
-    event ParValue(uint256 newParValue);
-    event Guarantor(string indexed newGuarantorIndexed, string newGuarantor);
-    event BondHolder(string indexed newBondHolderIndexed, string newBondHolder);
-    event MaturityDate(
-        string indexed newMaturityDateIndexed,
-        string newMaturityDate
-    );
-    event InterestScheduleFormat(
-        string indexed newInterestScheduleFormatIndexed,
-        string newInterestScheduleFormat
-    );
-    event InterestPaymentDate(
-        string indexed newInterestPaymentDateIndexed,
-        string newInterestPaymentDate
-    );
-    event DayCountConvention(
-        string indexed newDayCountConventionIndexed,
-        string newDayCountConvention
-    );
-    event BusinessDayConvention(
-        string indexed newBusinessDayConventionIndexed,
-        string newBusinessDayConvention
-    );
-    event PublicHolidaysCalendar(
-        string indexed newPublicHolidaysCalendarIndexed,
-        string newPublicHolidaysCalendar
-    );
-    event IssuanceDate(
-        string indexed newIssuanceDateIndexed,
-        string newIssuanceDate
-    );
-    event CouponFrequency(
-        string indexed newCouponFrequencyIndexed,
-        string newCouponFrequency
-    );
-
-    function __DebtBaseModule_init(address admin) internal onlyInitializing {
-        /* OpenZeppelin */
-        __Context_init_unchained();
-
-        // AccessControlUpgradeable inherits from ERC165Upgradeable
-        __ERC165_init_unchained();
-        // AuthorizationModule inherits from AccessControlUpgradeable
-        __AccessControl_init_unchained();
-
-        /* CMTAT modules */
-        // Security
-        __AuthorizationModule_init_unchained(admin);
-
-        // own function
-        __DebtBaseModule_init_unchained();
-    }
-
-    function __DebtBaseModule_init_unchained() internal onlyInitializing {
-        // no variable to initialize
-    }
-
-    /*
-    @notice Set all attributes of debt
-    The values of all attributes will be changed even if the new values are the same as the current ones
-    */
-    function setDebt(DebtBase memory debt_) public onlyRole(DEBT_ROLE) {
-        // setGuarantor
-        debt = (
-            DebtBase(
-                debt_.interestRate,
-                debt_.parValue,
-                debt_.guarantor,
-                debt_.bondHolder,
-                debt_.maturityDate,
-                debt_.interestScheduleFormat,
-                debt_.interestPaymentDate,
-                debt_.dayCountConvention,
-                debt_.businessDayConvention,
-                debt_.publicHolidaysCalendar,
-                debt_.issuanceDate,
-                debt_.couponFrequency
-            )
-        );
-        emit InterestRate(debt_.interestRate);
-        emit ParValue(debt_.parValue);
-        emit Guarantor(debt_.guarantor, debt_.guarantor);
-        emit BondHolder(debt_.bondHolder, debt_.bondHolder);
-        emit MaturityDate(debt_.maturityDate, debt_.maturityDate);
-        emit InterestScheduleFormat(
-            debt_.interestScheduleFormat,
-            debt_.interestScheduleFormat
-        );
-        emit InterestPaymentDate(
-            debt_.interestPaymentDate,
-            debt_.interestPaymentDate
-        );
-        emit DayCountConvention(
-            debt_.dayCountConvention,
-            debt_.dayCountConvention
-        );
-        emit BusinessDayConvention(
-            debt_.businessDayConvention,
-            debt_.businessDayConvention
-        );
-        emit PublicHolidaysCalendar(
-            debt_.publicHolidaysCalendar,
-            debt_.publicHolidaysCalendar
-        );
-
-        emit IssuanceDate(debt_.issuanceDate, debt_.issuanceDate);
-
-        emit CouponFrequency(debt_.couponFrequency, debt_.couponFrequency);
-    }
-
-    /*
-    @notice The call will be reverted if the new value of interestRate is the same as the current one
-    */
-    function setInterestRate(uint256 interestRate_) public onlyRole(DEBT_ROLE) {
-        require(debt.interestRate != interestRate_, "Same value");
-        debt.interestRate = interestRate_;
-        emit InterestRate(interestRate_);
-    }
-
-    /*
-    @notice The call will be reverted if the new value of parValue is the same as the current one
-    */
-    function setParValue(uint256 parValue_) public onlyRole(DEBT_ROLE) {
-        require(debt.parValue != parValue_, "Same value");
-        debt.parValue = parValue_;
-        emit ParValue(parValue_);
-    }
-
-    /*
-    @notice The Guarantor will be changed even if the new value is the same as the current one
-    */
-    function setGuarantor(string memory guarantor_) public onlyRole(DEBT_ROLE) {
-        debt.guarantor = guarantor_;
-        emit Guarantor(guarantor_, guarantor_);
-    }
-
-    /*
-    @notice The bonHolder will be changed even if the new value is the same as the current one
-    */
-    function setBondHolder(
-        string memory bondHolder_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.bondHolder = bondHolder_;
-        emit BondHolder(bondHolder_, bondHolder_);
-    }
-
-    /*
-    @notice The maturityDate will be changed even if the new value is the same as the current one
-    */
-    function setMaturityDate(
-        string memory maturityDate_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.maturityDate = maturityDate_;
-        emit MaturityDate(maturityDate_, maturityDate_);
-    }
-
-    /*
-    @notice The interestScheduleFormat will be changed even if the new value is the same as the current one
-    */
-    function setInterestScheduleFormat(
-        string memory interestScheduleFormat_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.interestScheduleFormat = interestScheduleFormat_;
-        emit InterestScheduleFormat(
-            interestScheduleFormat_,
-            interestScheduleFormat_
-        );
-    }
-
-    /*
-    @notice The interestPaymentDate will be changed even if the new value is the same as the current one
-    */
-    function setInterestPaymentDate(
-        string memory interestPaymentDate_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.interestPaymentDate = interestPaymentDate_;
-        emit InterestPaymentDate(interestPaymentDate_, interestPaymentDate_);
-    }
-
-    /*
-    @notice The dayCountConvention will be changed even if the new value is the same as the current one
-    */
-    function setDayCountConvention(
-        string memory dayCountConvention_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.dayCountConvention = dayCountConvention_;
-        emit DayCountConvention(dayCountConvention_, dayCountConvention_);
-    }
-
-    /*
-    @notice The businessDayConvention will be changed even if the new value is the same as the current one
-    */
-    function setBusinessDayConvention(
-        string memory businessDayConvention_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.businessDayConvention = businessDayConvention_;
-        emit BusinessDayConvention(
-            businessDayConvention_,
-            businessDayConvention_
-        );
-    }
-
-    /*
-    @notice The publicHolidayCalendar will be changed even if the new value is the same as the current one
-    */
-    function setPublicHolidaysCalendar(
-        string memory publicHolidaysCalendar_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.publicHolidaysCalendar = publicHolidaysCalendar_;
-        emit PublicHolidaysCalendar(
-            publicHolidaysCalendar_,
-            publicHolidaysCalendar_
-        );
-    }
-
-    /*
-    @notice The issuanceDate will be changed even if the new value is the same as the current one
-    */
-    function setIssuanceDate(
-        string memory issuanceDate_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.issuanceDate = issuanceDate_;
-        emit IssuanceDate(issuanceDate_, issuanceDate_);
-    }
-
-    /*
-    @notice The couponFrequency will be changed even if the new value is the same as the current one
-    */
-    function setCouponFrequency(
-        string memory couponFrequency_
-    ) public onlyRole(DEBT_ROLE) {
-        debt.couponFrequency = couponFrequency_;
-        emit CouponFrequency(couponFrequency_, couponFrequency_);
-    }
-
-    uint256[50] private __gap;
-}
-
-
-// File openzeppelin-contracts-upgradeable/contracts/metatx/ERC2771ContextUpgradeable.sol
-
-// Original license: SPDX_License_Identifier: MIT
 // OpenZeppelin Contracts (last updated v4.7.0) (metatx/ERC2771Context.sol)
 
 pragma solidity ^0.8.9;
@@ -3094,10 +3494,9 @@ abstract contract ERC2771ContextUpgradeable is Initializable, ContextUpgradeable
     uint256[50] private __gap;
 }
 
+// File: contracts/modules/wrapper/optional/MetaTxModule.sol
 
-// File contracts/modules/wrapper/optional/MetaTxModule.sol
 
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
@@ -3111,27 +3510,28 @@ pragma solidity ^0.8.17;
  */
 abstract contract MetaTxModule is ERC2771ContextUpgradeable {
     /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor(
-        address trustedForwarder
-    ) ERC2771ContextUpgradeable(trustedForwarder) {
+    constructor(address trustedForwarder)
+        ERC2771ContextUpgradeable(trustedForwarder)
+    {
         // Nothing to do
     }
 
     function _msgSender()
         internal
         view
-        virtual
         override
+        virtual
         returns (address sender)
     {
-        return ERC2771ContextUpgradeable._msgSender();
+        // return ERC2771ContextUpgradeable._msgSender();
+        return msg.sender;
     }
 
     function _msgData()
         internal
         view
-        virtual
         override
+        virtual
         returns (bytes calldata)
     {
         return ERC2771ContextUpgradeable._msgData();
@@ -3140,252 +3540,222 @@ abstract contract MetaTxModule is ERC2771ContextUpgradeable {
     uint256[50] private __gap;
 }
 
-
-// File contracts/modules/internal/ValidationModuleInternal.sol
-
-// Original license: SPDX_License_Identifier: MPL-2.0
-
-pragma solidity ^0.8.17;
-
-
+// File: contracts/CMTAT.sol
 
 /**
- * @dev Validation module.
+ * @dev Wrappers over Solidity's arithmetic operations.
  *
- * Useful for to restrict and validate transfers
+ * NOTE: `SafeMath` is generally not needed starting with Solidity 0.8, since the compiler
+ * now has built in overflow checking.
  */
-abstract contract ValidationModuleInternal is
-    Initializable,
-    ContextUpgradeable
-{
+library SafeMath {
     /**
-     * @dev Emitted when a rule engine is set.
+     * @dev Returns the addition of two unsigned integers, with an overflow flag.
+     *
+     * _Available since v3.4._
      */
-    event RuleEngine(IEIP1404Wrapper indexed newRuleEngine);
-
-    IEIP1404Wrapper public ruleEngine;
-
-    /**
-     * @dev Initializes the contract with rule engine.
-     */
-    function __Validation_init(
-        IEIP1404Wrapper ruleEngine_
-    ) internal onlyInitializing {
-        __Context_init_unchained();
-        __Validation_init_unchained(ruleEngine_);
-    }
-
-    function __Validation_init_unchained(
-        IEIP1404Wrapper ruleEngine_
-    ) internal onlyInitializing {
-        if (address(ruleEngine_) != address(0)) {
-            ruleEngine = ruleEngine_;
-            emit RuleEngine(ruleEngine);
+    function tryAdd(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            uint256 c = a + b;
+            if (c < a) return (false, 0);
+            return (true, c);
         }
     }
 
     /**
-    @dev before making a call to this function, you have to check if a ruleEngine is set.
-    */
-    function _validateTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) internal view returns (bool) {
-        return ruleEngine.validateTransfer(from, to, amount);
+     * @dev Returns the subtraction of two unsigned integers, with an overflow flag.
+     *
+     * _Available since v3.4._
+     */
+    function trySub(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            if (b > a) return (false, 0);
+            return (true, a - b);
+        }
     }
 
     /**
-    @dev before making a call to this function, you have to check if a ruleEngine is set.
-    */
-    function _messageForTransferRestriction(
-        uint8 restrictionCode
-    ) internal view returns (string memory) {
-        return ruleEngine.messageForTransferRestriction(restrictionCode);
+     * @dev Returns the multiplication of two unsigned integers, with an overflow flag.
+     *
+     * _Available since v3.4._
+     */
+    function tryMul(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            // Gas optimization: this is cheaper than requiring 'a' not being zero, but the
+            // benefit is lost if 'b' is also tested.
+            // See: https://github.com/OpenZeppelin/openzeppelin-contracts/pull/522
+            if (a == 0) return (true, 0);
+            uint256 c = a * b;
+            if (c / a != b) return (false, 0);
+            return (true, c);
+        }
     }
 
     /**
-    @dev before making a call to this function, you have to check if a ruleEngine is set.
-    */
-    function _detectTransferRestriction(
-        address from,
-        address to,
-        uint256 amount
-    ) internal view returns (uint8) {
-        return ruleEngine.detectTransferRestriction(from, to, amount);
+     * @dev Returns the division of two unsigned integers, with a division by zero flag.
+     *
+     * _Available since v3.4._
+     */
+    function tryDiv(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            if (b == 0) return (false, 0);
+            return (true, a / b);
+        }
     }
 
-    uint256[50] private __gap;
+    /**
+     * @dev Returns the remainder of dividing two unsigned integers, with a division by zero flag.
+     *
+     * _Available since v3.4._
+     */
+    function tryMod(uint256 a, uint256 b) internal pure returns (bool, uint256) {
+        unchecked {
+            if (b == 0) return (false, 0);
+            return (true, a % b);
+        }
+    }
+
+    /**
+     * @dev Returns the addition of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `+` operator.
+     *
+     * Requirements:
+     *
+     * - Addition cannot overflow.
+     */
+    function add(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a + b;
+    }
+
+    /**
+     * @dev Returns the subtraction of two unsigned integers, reverting on
+     * overflow (when the result is negative).
+     *
+     * Counterpart to Solidity's `-` operator.
+     *
+     * Requirements:
+     *
+     * - Subtraction cannot overflow.
+     */
+    function sub(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a - b;
+    }
+
+    /**
+     * @dev Returns the multiplication of two unsigned integers, reverting on
+     * overflow.
+     *
+     * Counterpart to Solidity's `*` operator.
+     *
+     * Requirements:
+     *
+     * - Multiplication cannot overflow.
+     */
+    function mul(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a * b;
+    }
+
+    /**
+     * @dev Returns the integer division of two unsigned integers, reverting on
+     * division by zero. The result is rounded towards zero.
+     *
+     * Counterpart to Solidity's `/` operator.
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function div(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a / b;
+    }
+
+    /**
+     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
+     * reverting when dividing by zero.
+     *
+     * Counterpart to Solidity's `%` operator. This function uses a `revert`
+     * opcode (which leaves remaining gas untouched) while Solidity uses an
+     * invalid opcode to revert (consuming all remaining gas).
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function mod(uint256 a, uint256 b) internal pure returns (uint256) {
+        return a % b;
+    }
+
+    /**
+     * @dev Returns the subtraction of two unsigned integers, reverting with custom message on
+     * overflow (when the result is negative).
+     *
+     * CAUTION: This function is deprecated because it requires allocating memory for the error
+     * message unnecessarily. For custom revert reasons use {trySub}.
+     *
+     * Counterpart to Solidity's `-` operator.
+     *
+     * Requirements:
+     *
+     * - Subtraction cannot overflow.
+     */
+    function sub(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        unchecked {
+            require(b <= a, errorMessage);
+            return a - b;
+        }
+    }
+
+    /**
+     * @dev Returns the integer division of two unsigned integers, reverting with custom message on
+     * division by zero. The result is rounded towards zero.
+     *
+     * Counterpart to Solidity's `/` operator. Note: this function uses a
+     * `revert` opcode (which leaves remaining gas untouched) while Solidity
+     * uses an invalid opcode to revert (consuming all remaining gas).
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function div(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        unchecked {
+            require(b > 0, errorMessage);
+            return a / b;
+        }
+    }
+
+    /**
+     * @dev Returns the remainder of dividing two unsigned integers. (unsigned integer modulo),
+     * reverting with custom message when dividing by zero.
+     *
+     * CAUTION: This function is deprecated because it requires allocating memory for the error
+     * message unnecessarily. For custom revert reasons use {tryMod}.
+     *
+     * Counterpart to Solidity's `%` operator. This function uses a `revert`
+     * opcode (which leaves remaining gas untouched) while Solidity uses an
+     * invalid opcode to revert (consuming all remaining gas).
+     *
+     * Requirements:
+     *
+     * - The divisor cannot be zero.
+     */
+    function mod(uint256 a, uint256 b, string memory errorMessage) internal pure returns (uint256) {
+        unchecked {
+            require(b > 0, errorMessage);
+            return a % b;
+        }
+    }
 }
 
-
-// File contracts/modules/wrapper/optional/ValidationModule.sol
-
-// Original license: SPDX_License_Identifier: MPL-2.0
-
-pragma solidity ^0.8.17;
-
-
-
-
-
-/**
- * @dev Validation module.
- *
- * Useful for to restrict and validate transfers
- */
-abstract contract ValidationModule is
-    ValidationModuleInternal,
-    PauseModule,
-    EnforcementModule,
-    IEIP1404Wrapper
-{
-    string constant TEXT_TRANSFER_OK = "No restriction";
-    string constant TEXT_UNKNOWN_CODE = "Unknown code";
-
-    function __ValidationModule_init(
-        IEIP1404Wrapper ruleEngine_,
-        address admin
-    ) internal onlyInitializing {
-        /* OpenZeppelin */
-        __Context_init_unchained();
-        // AccessControlUpgradeable inherits from ERC165Upgradeable
-        __ERC165_init_unchained();
-        __AccessControl_init_unchained();
-        __Pausable_init_unchained();
-
-        /* CMTAT modules */
-        // Internal
-        __Validation_init_unchained(ruleEngine_);
-
-        // Security
-        __AuthorizationModule_init_unchained(admin);
-
-        // Wrapper
-        __PauseModule_init_unchained();
-        __EnforcementModule_init_unchained();
-
-        // own function
-        __ValidationModule_init_unchained();
-    }
-
-    function __ValidationModule_init_unchained() internal onlyInitializing {
-        // no variable to initialize
-    }
-
-    /*
-    @notice set a RuleEngine
-    @param ruleEngine_ the call will be reverted if the new value of ruleEngine is the same as the current one
-    */
-    function setRuleEngine(
-        IEIP1404Wrapper ruleEngine_
-    ) external onlyRole(DEFAULT_ADMIN_ROLE) {
-        require(ruleEngine != ruleEngine_, "Same value");
-        ruleEngine = ruleEngine_;
-        emit RuleEngine(ruleEngine_);
-    }
-
-    /**
-     * @dev ERC1404 check if _value token can be transferred from _from to _to
-     * @param from address The address which you want to send tokens from
-     * @param to address The address which you want to transfer to
-     * @param amount uint256 the amount of tokens to be transferred
-     * @return code of the rejection reason
-     */
-    function detectTransferRestriction(
-        address from,
-        address to,
-        uint256 amount
-    ) public view override returns (uint8 code) {
-        if (paused()) {
-            return uint8(REJECTED_CODE_BASE.TRANSFER_REJECTED_PAUSED);
-        } else if (frozen(from)) {
-            return uint8(REJECTED_CODE_BASE.TRANSFER_REJECTED_FROM_FROZEN);
-        } else if (frozen(to)) {
-            return uint8(REJECTED_CODE_BASE.TRANSFER_REJECTED_TO_FROZEN);
-        } else if (address(ruleEngine) != address(0)) {
-            return _detectTransferRestriction(from, to, amount);
-        } else {
-            return uint8(REJECTED_CODE_BASE.TRANSFER_OK);
-        }
-    }
-
-    /**
-     * @dev ERC1404 returns the human readable explaination corresponding to the error code returned by detectTransferRestriction
-     * @param restrictionCode The error code returned by detectTransferRestriction
-     * @return message The human readable explaination corresponding to the error code returned by detectTransferRestriction
-     */
-    function messageForTransferRestriction(
-        uint8 restrictionCode
-    ) external view override returns (string memory message) {
-        if (restrictionCode == uint8(REJECTED_CODE_BASE.TRANSFER_OK)) {
-            return TEXT_TRANSFER_OK;
-        } else if (
-            restrictionCode ==
-            uint8(REJECTED_CODE_BASE.TRANSFER_REJECTED_PAUSED)
-        ) {
-            return TEXT_TRANSFER_REJECTED_PAUSED;
-        } else if (
-            restrictionCode ==
-            uint8(REJECTED_CODE_BASE.TRANSFER_REJECTED_FROM_FROZEN)
-        ) {
-            return TEXT_TRANSFER_REJECTED_FROM_FROZEN;
-        } else if (
-            restrictionCode ==
-            uint8(REJECTED_CODE_BASE.TRANSFER_REJECTED_TO_FROZEN)
-        ) {
-            return TEXT_TRANSFER_REJECTED_TO_FROZEN;
-        } else if (address(ruleEngine) != address(0)) {
-            return _messageForTransferRestriction(restrictionCode);
-        } else {
-            return TEXT_UNKNOWN_CODE;
-        }
-    }
-
-    function validateTransfer(
-        address from,
-        address to,
-        uint256 amount
-    ) public view override returns (bool) {
-        if (paused() || frozen(from) || frozen(to)) {
-            return false;
-        }
-        if (address(ruleEngine) != address(0)) {
-            return _validateTransfer(from, to, amount);
-        }
-        return true;
-    }
-
-    uint256[50] private __gap;
-}
-
-
-// File contracts/modules/CMTAT_BASE.sol
-
-// Original license: SPDX_License_Identifier: MPL-2.0
 
 pragma solidity ^0.8.17;
 
 // required OZ imports here
 
 
-
-
-
-
-/*
-SnapshotModule:
-Add this import in case you add the SnapshotModule
-
-*/
-
-
-
-
-
-
-
-abstract contract CMTAT_BASE is
+contract CMTAT is
     Initializable,
     ContextUpgradeable,
     BaseModule,
@@ -3395,55 +3765,67 @@ abstract contract CMTAT_BASE is
     EnforcementModule,
     ValidationModule,
     MetaTxModule,
-    ERC20BaseModule,
-    // SnapshotModule,
-    DebtBaseModule,
-    CreditEventsModule
+    SnapshotModule,
+    ERC20BaseModule
 {
-    /**
-    @notice 
-    initialize the proxy contract
-    The calls to this function will revert if the contract was deployed without a proxy
-    */
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    uint public totalHolders;
+    address public escrow;
+    address public vesting;
+    using SafeMath for uint;
+    constructor(address forwarder, bool deployedWithProxy_, address owner, string memory name, string memory symbol, string memory tokenId, string memory terms
+    ) MetaTxModule(forwarder) {
+         if(!deployedWithProxy_){
+            // Initialize the contract to avoid front-running
+            // Warning : do not initialize the proxy
+            initialize(deployedWithProxy_, owner, name, symbol,tokenId, terms);
+         }else{
+            // Initialize the variable for the implementation
+            deployedWithProxy = true;
+            // Disable the possibility to initialize the implementation
+            _disableInitializers();
+         }
+    }
+
+    function setVesting(address _vesting) public {
+        require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender) , "only admin");
+        vesting = _vesting;
+    }
+
+    function setEscrow(address _escrow) public {
+        require(hasRole(DEFAULT_ADMIN_ROLE, msg.sender) , "only admin");
+        escrow = _escrow;
+    }
+
     function initialize(
-        address admin,
-        string memory nameIrrevocable,
-        string memory symbolIrrevocable,
-        string memory tokenId_,
-        string memory terms_,
-        IEIP1404Wrapper ruleEngine_,
-        string memory information_,
-        uint256 flag_
+        bool deployedWithProxy_,
+        address owner,
+        string memory name,
+        string memory symbol,
+        string memory tokenId,
+        string memory terms
     ) public initializer {
-        __CMTAT_init(
-            admin,
-            nameIrrevocable,
-            symbolIrrevocable,
-            tokenId_,
-            terms_,
-            ruleEngine_,
-            information_,
-            flag_
-        );
+        __CMTAT_init(deployedWithProxy_, owner, name, symbol, tokenId, terms);
     }
 
     /**
-    @dev calls the different initialize functions from the different modules
-    */
+     * @dev Grants `DEFAULT_ADMIN_ROLE`, `MINTER_ROLE` and `PAUSER_ROLE` to the
+     * account that deploys the contract.
+     *
+     * See {ERC20-constructor}.
+     */
     function __CMTAT_init(
-        address admin,
-        string memory nameIrrevocable,
-        string memory symbolIrrevocable,
-        string memory tokenId_,
-        string memory terms_,
-        IEIP1404Wrapper ruleEngine_,
-        string memory information_,
-        uint256 flag_
+        bool deployedWithProxy_,
+        address owner,
+        string memory name,
+        string memory symbol,
+        string memory tokenId,
+        string memory terms
     ) internal onlyInitializing {
         /* OpenZeppelin library */
         // OZ init_unchained functions are called firstly due to inheritance
         __Context_init_unchained();
-        __ERC20_init_unchained(nameIrrevocable, symbolIrrevocable);
+        __ERC20_init_unchained(name, symbol);
         // AccessControlUpgradeable inherits from ERC165Upgradeable
         __ERC165_init_unchained();
         // AuthorizationModule inherits from AccessControlUpgradeable
@@ -3452,16 +3834,13 @@ abstract contract CMTAT_BASE is
 
         /* Internal Modules */
         __Enforcement_init_unchained();
-        /*
-        SnapshotModule:
-        Add this call in case you add the SnapshotModule
         __Snapshot_init_unchained();
-        */
-        __Validation_init_unchained(ruleEngine_);
+        // we set the RuleEngine by calling the setter
+        // __Validation_init_unchained(IRuleEngine ruleEngine_)
 
         /* Wrapper */
         // AuthorizationModule_init_unchained is called firstly due to inheritance
-        __AuthorizationModule_init_unchained(admin);
+        __AuthorizationModule_init_unchained();
         __BurnModule_init_unchained();
         __MintModule_init_unchained();
         // EnforcementModule_init_unchained is called before ValidationModule_init_unchained due to inheritance
@@ -3470,29 +3849,26 @@ abstract contract CMTAT_BASE is
         // PauseModule_init_unchained is called before ValidationModule_init_unchained due to inheritance
         __PauseModule_init_unchained();
         __ValidationModule_init_unchained();
-
-        /*
-        SnapshotModule:
-        Add this call in case you add the SnapshotModule
         __SnasphotModule_init_unchained();
-        */
 
         /* Other modules */
-        __DebtBaseModule_init_unchained();
-        __CreditEvents_init_unchained();
-        __Base_init_unchained(tokenId_, terms_, information_, flag_);
+        __Base_init_unchained(tokenId, terms);
 
-        /* own function */
-        __CMTAT_init_unchained();
+         /* own function */
+        __CMTAT_init_unchained(deployedWithProxy_, owner);
     }
 
-    function __CMTAT_init_unchained() internal onlyInitializing {
-        // no variable to initialize
+
+    function __CMTAT_init_unchained(bool deployedWithProxy_, address owner) internal onlyInitializing {
+        deployedWithProxy = deployedWithProxy_;
+        _grantRole(DEFAULT_ADMIN_ROLE, owner);
+        _grantRole(ENFORCER_ROLE, owner);
+        _grantRole(MINTER_ROLE, owner);
+        _grantRole(BURNER_ROLE, owner);
+        _grantRole(PAUSER_ROLE, owner);
+        _grantRole(SNAPSHOOTER_ROLE, owner);
     }
 
-    /**
-    @notice Returns the number of decimals used to get its user representation.
-    */
     function decimals()
         public
         view
@@ -3507,40 +3883,29 @@ abstract contract CMTAT_BASE is
         address sender,
         address recipient,
         uint256 amount
-    )
-        public
-        virtual
-        override(ERC20Upgradeable, ERC20BaseModule)
-        returns (bool)
-    {
+    ) public virtual override(ERC20Upgradeable, ERC20BaseModule) returns (bool) {
         return ERC20BaseModule.transferFrom(sender, recipient, amount);
     }
 
-    /*
-    @dev 
-    SnapshotModule:
-    - override SnapshotModuleInternal if you add the SnapshotModule
-    e.g. override(SnapshotModuleInternal, ERC20Upgradeable)
-    - remove the keyword view
-    */
     function _beforeTokenTransfer(
         address from,
         address to,
         uint256 amount
-    ) internal view override(ERC20Upgradeable) {
-        require(
-            ValidationModule.validateTransfer(from, to, amount),
-            "CMTAT: transfer rejected by validation module"
-        );
-        // We call the SnapshotModule only if the transfer is valid
-        /*
-        SnapshotModule:
-        Add this call in case you add the SnapshotModule
+    ) internal override(SnapshotModuleInternal, ERC20Upgradeable) {
+        require(!paused(), "CMTAT: token transfer while paused");
+        require(!frozen(from), "CMTAT: token transfer while frozen");
+        if(balanceOf(to) == 0 && to != escrow && to != vesting){
+            totalHolders = totalHolders.add(1);
+        }
+        if(balanceOf(from) == amount && to != escrow && to != vesting){
+            totalHolders = totalHolders.sub(1);
+        }
         SnapshotModuleInternal._beforeTokenTransfer(from, to, amount);
-        */
+
+        require(validateTransfer(from, to, amount), "CMTAT: transfer rejected by validation module");
     }
 
-    /** 
+    /**
     @dev This surcharge is not necessary if you do not use the MetaTxModule
     */
     function _msgSender()
@@ -3552,7 +3917,7 @@ abstract contract CMTAT_BASE is
         return MetaTxModule._msgSender();
     }
 
-    /** 
+    /**
     @dev This surcharge is not necessary if you do not use the MetaTxModule
     */
     function _msgData()
@@ -3566,64 +3931,28 @@ abstract contract CMTAT_BASE is
 
     uint256[50] private __gap;
 }
-
-
-// File contracts/CMTAT_STANDALONE.sol
-
-// Original license: SPDX_License_Identifier: MPL-2.0
-
-pragma solidity ^0.8.17;
-
-contract CMTAT_STANDALONE is CMTAT_BASE {
-    /** 
-    @notice Contract version for standalone deployment
-    @param forwarderIrrevocable address of the forwarder, required for the gasless support
-    @param admin address of the admin of contract (Access Control)
-    @param nameIrrevocable name of the token
-    @param symbolIrrevocable name of the symbol
-    @param tokenId name of the tokenId
-    @param terms terms associated with the token
-    @param ruleEngine address of the ruleEngine to apply rules to transfers
-    @param information additional information to describe the token
-    @param flag add information under the form of bit(0, 1)
-    */
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor(
-        address forwarderIrrevocable,
-        address admin,
-        string memory nameIrrevocable,
-        string memory symbolIrrevocable,
-        string memory tokenId_,
-        string memory terms_,
-        IEIP1404Wrapper ruleEngine_,
-        string memory information_,
-        uint256 flag_
-    ) MetaTxModule(forwarderIrrevocable) {
-        // Initialize the contract to avoid front-running
-        // Warning : do not initialize the proxy
-        initialize(
-            admin,
-            nameIrrevocable,
-            symbolIrrevocable,
-            tokenId_,
-            terms_,
-            ruleEngine_,
-            information_,
-            flag_
-        );
-    }
-
-    // No storage gap because the contract is deployed in standalone mode
-}
-
-contract Factory {
-   CMTAT_STANDALONE[] public companies;
-   address payable admin;
+contract Factory is MetaTxModule{
+   CMTAT[] public companies;
+   address public admin;
+   address public forwarder;
 
    uint256 public index;
 
-   constructor(){
+   mapping (address => address) public tokens;
+
+   constructor(address _forwarder) MetaTxModule(_forwarder) {
        admin = payable(msg.sender);
+       forwarder = _forwarder;
+   }
+
+   function setForwarder(address _newForwarder) external {
+       require(msg.sender == admin, "not allowed ! ");
+       forwarder = _newForwarder;
+   }
+
+   function setAdmin(address _newAdmin) external {
+       require(msg.sender == admin, "not allowed ! ");
+       admin = _newAdmin;
    }
 
    function CreateCompany(
@@ -3633,24 +3962,33 @@ contract Factory {
         string memory symbolIrrevocable,
         string memory tokenId_,
         string memory terms_,
-        IEIP1404Wrapper ruleEngine_,
+        address ruleEngine_,
         string memory information_,
         uint256 flag_
        ) public returns(address){
-
-     CMTAT_STANDALONE newCompany = new CMTAT_STANDALONE(
+// (address forwarder, 
+// bool deployedWithProxy_, 
+// address owner, 
+// string memory name, 
+// string memory symbol, 
+// string memory tokenId, 
+// string memory terms
+//     )
+     CMTAT newCompany = new CMTAT(
         forwarderIrrevocable,
+        false,
         admin,
         nameIrrevocable,
         symbolIrrevocable,
         tokenId_,
-        terms_,
-        ruleEngine_,
-        information_,
-        flag_
+        terms_
+        // ruleEngine_,
+        // information_,
+        // flag_
          );
      companies.push(newCompany);
      index += 1;
+     tokens[admin] = address(newCompany);
      return address(newCompany);
    }
 
