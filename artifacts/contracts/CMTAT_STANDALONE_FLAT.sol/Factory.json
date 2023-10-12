@@ -4,17 +4,6 @@
   "sourceName": "contracts/CMTAT_STANDALONE_FLAT.sol",
   "abi": [
     {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "_forwarder",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
       "anonymous": false,
       "inputs": [
         {
@@ -28,126 +17,144 @@
       "type": "event"
     },
     {
+      "anonymous": false,
       "inputs": [
         {
-          "internalType": "address",
-          "name": "admin",
-          "type": "address"
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
         },
         {
-          "internalType": "string",
-          "name": "nameIrrevocable",
-          "type": "string"
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
         },
         {
-          "internalType": "string",
-          "name": "symbolIrrevocable",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "tokenId_",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "terms_",
-          "type": "string"
-        },
-        {
-          "internalType": "address",
-          "name": "ruleEngine_",
-          "type": "address"
-        },
-        {
-          "internalType": "string",
-          "name": "information_",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "flag_",
-          "type": "uint256"
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
         }
       ],
-      "name": "CreateCompany",
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEFAULT_ADMIN_ROLE",
       "outputs": [
         {
-          "internalType": "address",
+          "internalType": "bytes32",
           "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
           "type": "address"
         }
       ],
+      "name": "grantRole",
+      "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
     },
     {
-      "inputs": [],
-      "name": "admin",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
       "inputs": [
         {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "companies",
-      "outputs": [
-        {
-          "internalType": "contract CMTAT",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "forwarder",
-      "outputs": [
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
         {
           "internalType": "address",
-          "name": "",
+          "name": "account",
           "type": "address"
         }
       ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "index",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "address",
-          "name": "forwarder",
-          "type": "address"
-        }
-      ],
-      "name": "isTrustedForwarder",
+      "name": "hasRole",
       "outputs": [
         {
           "internalType": "bool",
@@ -161,12 +168,17 @@
     {
       "inputs": [
         {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
           "internalType": "address",
-          "name": "_newAdmin",
+          "name": "account",
           "type": "address"
         }
       ],
-      "name": "setAdmin",
+      "name": "renounceRole",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -174,12 +186,17 @@
     {
       "inputs": [
         {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
           "internalType": "address",
-          "name": "_newForwarder",
+          "name": "account",
           "type": "address"
         }
       ],
-      "name": "setForwarder",
+      "name": "revokeRole",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
@@ -187,17 +204,17 @@
     {
       "inputs": [
         {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
+          "internalType": "bytes4",
+          "name": "interfaceId",
+          "type": "bytes4"
         }
       ],
-      "name": "tokens",
+      "name": "supportsInterface",
       "outputs": [
         {
-          "internalType": "address",
+          "internalType": "bool",
           "name": "",
-          "type": "address"
+          "type": "bool"
         }
       ],
       "stateMutability": "view",
