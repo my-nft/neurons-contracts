@@ -3523,8 +3523,8 @@ abstract contract MetaTxModule is ERC2771ContextUpgradeable {
         virtual
         returns (address sender)
     {
-        // return ERC2771ContextUpgradeable._msgSender();
-        return msg.sender;
+        return ERC2771ContextUpgradeable._msgSender();
+        // return msg.sender;
     }
 
     function _msgData()
@@ -3772,9 +3772,12 @@ contract CMTAT is
     uint public totalHolders;
     address public escrow;
     address public vesting;
+    address public trustedForwarder;
     using SafeMath for uint;
     constructor(address forwarder, bool deployedWithProxy_, address owner, string memory name, string memory symbol, string memory tokenId, string memory terms
     ) MetaTxModule(forwarder) {
+        trustedForwarder = forwarder;
+
          if(!deployedWithProxy_){
             // Initialize the contract to avoid front-running
             // Warning : do not initialize the proxy
@@ -3934,24 +3937,24 @@ contract CMTAT is
 contract Factory is MetaTxModule{
    CMTAT[] public companies;
    address public admin;
-   address public forwarder;
+   address public trustedForwarder;
 
    uint256 public index;
 
    mapping (address => address) public tokens;
 
    constructor(address _forwarder) MetaTxModule(_forwarder) {
-       admin = payable(msg.sender);
-       forwarder = _forwarder;
+       admin = payable(_msgSender());
+       trustedForwarder = _forwarder;
    }
 
    function setForwarder(address _newForwarder) external {
-       require(msg.sender == admin, "not allowed ! ");
-       forwarder = _newForwarder;
+       require(_msgSender() == admin, "not allowed ! ");
+       trustedForwarder = _newForwarder;
    }
 
    function setAdmin(address _newAdmin) external {
-       require(msg.sender == admin, "not allowed ! ");
+       require(_msgSender() == admin, "not allowed ! ");
        admin = _newAdmin;
    }
 
@@ -3967,7 +3970,7 @@ contract Factory is MetaTxModule{
        ) public returns(address){
 
      CMTAT newCompany = new CMTAT(
-        forwarder,
+        trustedForwarder,
         false,
         admin,
         nameIrrevocable,
